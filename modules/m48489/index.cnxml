@@ -1,0 +1,33 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Team Members and Acknowledgments</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48489</md:content-id>
+  <md:title>Team Members and Acknowledgments</md:title>
+  <md:abstract/>
+  <md:uuid>265ba224-4f32-4f60-ba3e-c12946c6cfae</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.5969651848" strength="3">Testing, Conclusion and Future Work</link>
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.8164196597" strength="3">Motivation and Goal</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <section id="eip-277"><title>Team Members</title><list id="eip-522"><item>Xuaner Zhang: xuaner.zhang@rice.edu</item>
+<item>Wanjia Liu: wanjia.liu@rice.edu</item>
+<item>Xuejiao Liang: xuejiao.liang@rice.edu</item>
+<item>Xinyi Cen: xinyi.cen@rice.edu</item>
+</list><para id="eip-262"><title>Work distribution</title>We divided our work as follows:</para><list id="eip-691"><item>Video/Image Processing: Xuaner and Xuejiao</item>
+<item>Audio Processing: Wanjia and Xinyi</item>
+<item>Integration and code collection: Wanjia</item>
+<item>Poster: Xuaner</item>
+<item>Documentation: Xinyi and Xuaner</item></list></section><section id="eip-295"><title>Acknowledgments</title><para id="eip-665">
+We want to thank Dr. Christopher Studer for mentoring our project. We would also like to thank Prof. Richard Baraniuk, Raajen Patel and Eva Dyer for providing us with relevant knoweledge and background. This project is supported by RICE ECE Department.
+</para></section></content>
+
+</document>

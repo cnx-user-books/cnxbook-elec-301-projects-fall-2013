@@ -1,0 +1,85 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Implementation of the Kalman Filter</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48325</md:content-id>
+  <md:title>Implementation of the Kalman Filter</md:title>
+  <md:abstract>Explanation of the Kalman Filter implementation for digital rocket apogee detection.</md:abstract>
+  <md:uuid>b8bd466f-3163-4498-bf3e-6943abe045d4</md:uuid>
+</metadata>
+
+<content>
+    <para id="import-auto-id1164858532031">
+      <emphasis effect="bold">Kalman Filter</emphasis>
+    </para>
+    <para id="import-auto-id1164858109978">The Kalman filter is a time domain method of incorporating knowledge of the physical model of the system and of the reliability of the sensors to accurately estimate the state of the system. Implementation of the Kalman filter first requires the creation of an accurate physical model of the system. The two equations which are used to determine the estimate of the current state from that of the previous state are:</para>
+    <equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-599"><m:math>
+<m:apply><m:eq/><m:ci><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub></m:ci><m:ci><m:msub><m:mi>Ax</m:mi><m:apply><m:minus/><m:ci>k</m:ci><m:cn>1</m:cn></m:apply></m:msub></m:ci></m:apply>
+</m:math></equation><equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-37"><m:math>
+<m:apply><m:eq/><m:ci><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub></m:ci><m:apply><m:plus/><m:ci><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub></m:ci><m:apply><m:times/><m:ci>K</m:ci><m:apply><m:minus/><m:ci>m</m:ci><m:apply><m:times/><m:ci>H</m:ci><m:ci><m:msub><m:mi>x</m:mi><m:mi>k</m:mi></m:msub></m:ci></m:apply></m:apply></m:apply></m:apply></m:apply>
+</m:math></equation><equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-150"><m:math>
+<m:apply><m:eq/><m:ci>x</m:ci><m:vector><m:ci>s</m:ci><m:ci>v</m:ci><m:ci>a</m:ci></m:vector></m:apply>
+</m:math></equation><para id="import-auto-id1164861241167">Near apogee, the physical equations governing the rocket’s flight are simple, which makes <emphasis effect="italics">A</emphasis> simple. The only force acting on the rocket is gravity only (because drag forces vary with the square of the velocity they can be neglected near apogee, where the velocity is close to zero). </para>
+    <equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-664"><m:math>
+<m:apply><m:eq/><m:ci>s</m:ci><m:apply><m:plus/><m:apply><m:times/><m:ci>v</m:ci><m:ci>t</m:ci></m:apply><m:apply><m:times/><m:apply><m:divide/><m:cn>1</m:cn><m:cn>2</m:cn></m:apply><m:ci>a</m:ci><m:apply><m:power/><m:ci>t</m:ci><m:cn>2</m:cn></m:apply></m:apply></m:apply></m:apply>
+</m:math></equation><equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-823"><m:math>
+<m:apply><m:eq/><m:ci>v</m:ci><m:apply><m:times/><m:ci>a</m:ci><m:ci>t</m:ci></m:apply></m:apply>
+</m:math></equation><equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-117"><m:math>
+<m:apply><m:eq/><m:ci>a</m:ci><m:apply><m:minus/><m:ci>g</m:ci></m:apply></m:apply>
+</m:math></equation><equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-778"><m:math>
+<m:matrix><m:matrixrow><m:cn>1</m:cn><m:ci>Δt</m:ci><m:apply><m:divide/><m:apply><m:power/><m:ci>Δt</m:ci><m:cn>2</m:cn></m:apply><m:cn>2</m:cn></m:apply></m:matrixrow><m:matrixrow><m:cn>0</m:cn><m:cn>1</m:cn><m:ci>Δt</m:ci></m:matrixrow><m:matrixrow><m:cn>0</m:cn><m:cn>0</m:cn><m:cn>1</m:cn></m:matrixrow></m:matrix>
+</m:math></equation><para id="import-auto-id1164865735048">Where ∆t is the time between x<sub>k </sub>and x<sub>k+1</sub>.</para>
+    <para id="import-auto-id1164867143820"> m is a vector of the measured values from the sensors. Position is measured with the barometer and acceleration by the accelerometer.</para>
+    <equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-375"><m:math>
+<m:matrix><m:matrixrow><m:ci><m:msub><m:mi>s</m:mi><m:mi>m</m:mi></m:msub></m:ci></m:matrixrow><m:matrixrow><m:ci><m:msub><m:mi>a</m:mi><m:mi>m</m:mi></m:msub></m:ci></m:matrixrow></m:matrix>
+</m:math></equation><para id="import-auto-id1164859671308"><emphasis effect="italics">H</emphasis> is a matrix which maps x<sub>k</sub> to m:</para>
+    <equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-218"><m:math>
+<m:matrix><m:matrixrow><m:cn>1</m:cn><m:cn>0</m:cn><m:cn>0</m:cn></m:matrixrow><m:matrixrow><m:cn>0</m:cn><m:cn>0</m:cn><m:cn>1</m:cn></m:matrixrow></m:matrix>
+</m:math></equation><para id="import-auto-id1164858507936">Finally, <emphasis effect="italics">K</emphasis>, the Kalman gain matrix, weights the difference between the measured values and the estimated values. K is typically computed in real time as the system changes. However, the formula for K is rather complicated and therefore difficult to implement on a microcontroller in real time. Luckily, because the rocket’s flight can be approximated over the whole flight by the system and because the sensor variances do not change, K can be precomputed via the following recursive process:</para>
+    <equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-521"><m:math>
+<m:apply><m:eq/><m:ci>K</m:ci><m:apply><m:times/><m:ci>P</m:ci><m:apply><m:power/><m:ci>H</m:ci><m:ci>T</m:ci></m:apply><m:apply><m:power/><m:apply><m:plus/><m:apply><m:times/><m:ci>H</m:ci><m:ci>P</m:ci><m:apply><m:power/><m:ci>H</m:ci><m:ci>T</m:ci></m:apply></m:apply><m:ci>R</m:ci></m:apply><m:apply><m:minus/><m:cn>1</m:cn></m:apply></m:apply></m:apply></m:apply>
+</m:math></equation><equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-884"><m:math>
+<m:apply><m:eq/><m:ci>P</m:ci><m:apply><m:times/><m:apply><m:minus/><m:ci>I</m:ci><m:apply><m:times/><m:ci>K</m:ci><m:ci>P</m:ci></m:apply></m:apply><m:ci>P</m:ci></m:apply></m:apply>
+</m:math></equation><equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-363"><m:math>
+<m:apply><m:eq/><m:ci>P</m:ci><m:apply><m:plus/><m:apply><m:times/><m:ci>A</m:ci><m:ci>P</m:ci><m:apply><m:power/><m:ci>A</m:ci><m:ci>T</m:ci></m:apply></m:apply><m:ci>Q</m:ci></m:apply></m:apply>
+</m:math></equation><para id="import-auto-id1164860916665">In a small number of repetitions, <emphasis effect="italics">K</emphasis> will converge. In these equations, <emphasis effect="italics">R</emphasis> is the measurement noise  covariance matrix which holds the variances for each sensor:</para>
+    <equation xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-130"><m:math>
+<m:matrix><m:matrixrow><m:apply><m:power/><m:ci><m:msub><m:mi>σ</m:mi><m:mi>p</m:mi></m:msub></m:ci><m:cn>2</m:cn></m:apply><m:cn>0</m:cn></m:matrixrow><m:matrixrow><m:cn>0</m:cn><m:apply><m:power/><m:ci><m:msub><m:mi>σ</m:mi><m:mi>a</m:mi></m:msub></m:ci><m:cn>2</m:cn></m:apply></m:matrixrow></m:matrix>
+</m:math></equation><para id="import-auto-id1164853186247"><emphasis effect="italics">P</emphasis> is called the error covariance matrix, and it is first approximated with a guess, and then recursively defined like the K matrix. Finally, Q is the process noise covariance matrix, and is associated with the amount of noise added to the estimate in each time step. The code for calculating the K matrix is shown below:</para><code id="eip-369" display="block">.% Calculates the Kalman gain
+
+H = [1 0 0; 0 0 1];         % maps x (state variables) to z (sensor data)
+R = [35.8229 0; 0 .0012];   % measurement noise covariance
+Q = [0 0 0; 0 0 0; 0 0 1];  % process noise covariance matrix
+
+T = .05;                    % time step
+
+A = [1 T 1/2 * T^2; 0 1 T; 0 0 1]; % maps previous state to next state
+
+
+% these three equations recursively define k (matrix of kalman gains)
+% and P (error covariance matrix)
+
+P = eye(3); % initial guess for p
+
+for i = 1:20
+    
+    K = P*H'/(H*P*H' + R);   % Kalman gains
+    P = (eye(3) - K *H)*P;
+    P = A*P*A' + Q;
+end
+
+display(K)
+display(H)
+display(P)
+</code><para id="eip-160">The last piece of code demonstrates the actual implementation of the Kalman filter in Matlab.</para><code id="eip-457" display="block">.% implements Kalman filter on altitude and accelerometer data. Required vectors are alt and accel, which are vectors cointaining the altitude and accelerometer data at times corresponding to the time vector t.
+
+t = .05:.05:15;
+
+estimate = zeros(3,length(t));
+estimate(:,1) = [alt(1); 0; accel(1)];
+for i = 2:length(t)
+
+        estimate(:,i) = A*estimate(:,i-1);
+        estimate(:,i) = estimate(:,i) + K*([alt(i);accel(i)] - H *estimate(:,i));
+        
+end</code></content>
+</document>

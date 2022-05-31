@@ -1,0 +1,60 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Object Detection via Color Isolation</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48240</md:content-id>
+  <md:title>Object Detection via Color Isolation</md:title>
+  <md:abstract/>
+  <md:uuid>d5b6d2de-7301-43c6-9186-16666b0056f9</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-699"><title>OpenCV</title><para id="eip-889">The <cite window="new" url="http://www.opencv.org">OpenCV (Open Source Computer Vision) library</cite> provided the implementations for many of the methods explained in this module. Detailed explanations of the functionality are available on the OpenCV website.</para></section><section id="eip-100"><title>Why use Color Isolation?</title><para id="eip-366">Many computer vision methods exist for feature detection (such as detecting faces or characters in an image). We wanted the possibility to track multiple types of objects with our virtual theremin. Feature detection does not allow for this flexibility. We also needed our object recognition to be fast in order to drive real time audio. Feature detection algorithms work, but are known to be a bit slow. In order to address these concerns, we opted to use color to track objects. When the user launches our program, the user must select the object they wish to track. The color of this object is stored by the program. Every future frame retrieved by the webcam is scanned for all pixels within range of that color, allowing for the isolation of the object after a few steps.</para></section><section id="eip-459"><title>Color Spaces</title><para id="eip-589"><title>RGB</title>Cameras operate in the RGB color space. In the RGB color space, images store three channels of information: red, green, and blue. For each channel, 8 bits of data is stored. RGB images use additive color mixing: zeros in all channels represents black and 255 in each channel represents white. Although this color space is easy to use, highlight and shadow affect RGB values. Therefore, tracking using RGB values is not a realistic option to track a constant color.</para><para id="eip-44"><title>HSV</title>Our virtual theremin first converts RGB to HSV. HSV is an alternative color space that uses three different channels of information: Hue, Saturation, and Value. The HSV color space represents colors according to the figure below. Unlike RGB, highlight and shadow do not cause changes in hue values. Therefore, it is possible to track an object in variable lighting conditions using HSV. The conversion to HSV from RGB is as follows:
+
+</para><media id="hsveqn1" alt="HSV Equations" display="block">
+	   
+  <image mime-type="image/png" src="http://docs.opencv.org/_images/math/08dc0f541318c6f378c1078abbe241e7befe4eab.png"/>
+		 
+</media>
+<media id="hsveqn2" alt="HSV Equations" display="block">
+	   
+  <image mime-type="image/png" src="http://docs.opencv.org/_images/math/67a79f882971150a588fffceed5fbd151df08451.png"/>
+		 
+</media>
+<media id="hsveqn3" alt="HSV Equations" display="block">
+	   
+  <image mime-type="image/png" src="http://docs.opencv.org/_images/math/6139b6e8930bfe78ef8e6e6fe86e4a77065bc8e7.png"/>
+		 
+</media>
+<figure id="hsv_illustration"><media id="hsv_disp" alt="HSV Color Space">
+    <image mime-type="image/png" src="../../media/hsv.png" width="400px"/>
+  </media>
+  
+<caption>The HSV Color Space</caption></figure>
+<para id="eip-839">If the above formula results in H less than 0, it is converted to H+360.</para>
+</section><section id="eip-65"><title>Object Detection</title><para id="eip-408"><title>Gaussian Blur</title>Before any detection is attempted, a slight blur is applied to the image using a Gaussian kernel. This blur smoothes out any noise in the initial image. The blurred image is then converted to the HSV color space.
+</para><figure id="hsv_imgfig"><subfigure id="orig">
+<media id="oric_img" alt="Original Image">   
+<image mime-type="image/png" src="../../media/orig_img.png" width="400px"/>
+  </media>
+<caption>Original Image</caption>
+  </subfigure>
+<subfigure id="hsv_sub">
+<media id="hsv_img" alt="HSV Image">   
+<image mime-type="image/png" src="../../media/hsv_img.png" width="400px"/>
+  </media>
+<caption>HSV Image</caption>
+</subfigure>
+<caption>Original and HSV Images</caption></figure><para id="eip-427"><title>Image Thresholding</title>The user initially selects a point in the image. The HSV value at this point is used as the center color in the threshold range. Using the values set by the margin sliders, the HSV image is converted to a binary image by thresholding the HSV image to the specified range around the selected color.</para><figure id="thres_fig"><media id="thres" alt="Thresholded Image">
+    <image mime-type="image/png" src="../../media/thresh_img.png" width="400px"/>
+  </media>
+  
+<caption>Thresholded Image</caption></figure>
+<para id="eip-298"><title>Object Isolation</title>Depending on the environment, the thresholding image may or may not contain other noise. The example photo was taken against a solid background of a different color. Therefore, there is no other noise visible in this image. However, in order to determine which portion of the thresholded image is our desired object, we assume that noise is present.</para><para id="eip-36">We first find all of the contours from the edges in the thresholded image. For each found contour, we compute the area enclosed. We assume that the contour enclosing the largest area is the desired object. Once this specific contour has been determined, we fit an ellipse to the contour. From this ellipse, we can determine the angle of the major axis and the position of the center. The isolated image, shown below, has this ellipse drawn in red around the contour shaded in blue.</para><figure id="isolated_fig"><media id="isolated" alt="Isolated Image">
+    <image mime-type="image/png" src="../../media/isolated_img.png" width="400px"/>
+  </media>
+  
+<caption>Isolated Image</caption></figure>
+</section></content>
+
+</document>

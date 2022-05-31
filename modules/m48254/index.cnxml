@@ -1,0 +1,26 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Results and Performance</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48254</md:content-id>
+  <md:title>Results and Performance</md:title>
+  <md:abstract/>
+  <md:uuid>76b37297-f398-47bc-8185-47292217e4d4</md:uuid>
+</metadata>
+
+<content>
+  <list id="eip-980"><title>Results</title><item>Have multiple sounds possible--<emphasis>ACCOMPLISHED</emphasis></item>
+<item>Have multiple object usage possible--<emphasis>ACCOMPLISHED</emphasis></item>
+<item>Real-time video and audio output--<emphasis>ACCOMPLISHED</emphasis></item>
+<item>Steady object holds pitch and volume to within +/- 5%--<emphasis>ACCOMPLISHED</emphasis></item></list><list id="eip-77"><title>Object Tracking Accuracy</title><item>Angle: +- .05%*</item>
+<item>Size: +- 5%*</item>
+<item>Y-position: +- 1%*</item>
+
+
+</list><list id="eip-84"><title>Speed</title><item>Frame Rate: 11 FPS**</item></list><note id="eip-310">*Maximum deviation from mean as a percentage of range for that parameter (Minute-long capture of stationary object</note><note id="eip-300">**Single-object mode on a Macbook Pro </note><para id="delete_me">See the video below for a demo of our virtual theremin.</para><media id="theremin-video" alt="Theremin Video" display="block">
+<flash mime-type="application/x-shockwave-flash" src="//www.youtube-nocookie.com/v/aLsQvx5Ym70?version=3&amp;hl=en_US&amp;rel=0" width="420" height="315"/>
+
+</media>
+</content>
+
+</document>

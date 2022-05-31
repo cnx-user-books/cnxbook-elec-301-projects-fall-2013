@@ -1,0 +1,58 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Methodology</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48269</md:content-id>
+  <md:title>Methodology</md:title>
+  <md:abstract>Overview of matched filter technique used to identify characters on a license plate.</md:abstract>
+  <md:uuid>81195505-fd7a-4ed4-95f6-0fad679c31ac</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-854"><title>Introduction</title><para id="eip-897">While the human eye can quickly identify characters on a plate and compare for similarity, training a program to use computer vision to do the same task presents many new difficulties. First, the program must be able to identify the license plate out of the captured data image, crop the image to obtain the important information, normalize the size and positioning of the plate, and finally apply a matched filter algorithm to match each character to the correct characters from a template. Each step of the process presents a unique challenge. In this section, we will cover the subtleties of each step and the solutions we chose to address them.  
+</para></section><section id="eip-683"><title>Project Overview</title><para id="eip-447"><title>1. Data Collection and Template Dictionary</title>The first challenge in developing a system that can accurately identify a license plate is to be able to recognize a license in a given image. This step is certainly the most challenging part, and requires the use of an advanced signal processing algorithm known as the Scale Invariant Feature Transform (SIFT). Even though we will not be discussing the algorithm in detail as it is not the focus of this module, it is necessary to understand how it can be used to provide added functionality to the identification system that we are presenting. For a given image, the SIFT algorithm relies on interesting points of a given object to be able to recognize it. These points provide a "feature description" of the object, and can be extracted from a training image. For the algorithm to work properly, the features extracted must be recognizable under changes in illumination, scale, and image noise. Once the object of interest is identified on an image, it can then be manipulated, and rescaled to an optimal size and position for the processing required during identification. 
+</para><para id="eip-600">The method presented in this module assumes that the license has already been identified and placed in a position suitable for the matched filter. In order for the tests to faithfully represent how the system will operate in a real world application, it is necessary that the input images be all taken from the same angle. In addition, the system presented here does not require that the images used be of high quality. Any camera can achieve adequate results, however, higher resolution can improve efficiency of the program. For our testing and data collection, we used an iPhone camera to accomplish this.
+</para></section><para id="eip-19"><figure id="letter">
+  <title>Template Dictionary Character ‘B’</title>
+  <media id="b" alt="Template Character B">
+    <image mime-type="image/jpeg" src="../../media/B.jpg"/>
+  </media>
+  <caption>
+     Image of template dictionary character ‘B’ used by matched filter algorithm.
+  </caption>
+</figure>
+<figure id="license-plate">
+  <title>Test License Plate</title>
+  <media id="lp" alt="Test License Plate">
+    <image mime-type="image/jpeg" src="../../media/Colored Plate.jpg"/>
+  </media>
+  <caption>
+     Image of Texas License Plate used for testing.
+  </caption>
+</figure>
+
+
+
+</para><para id="eip-376"><title>2. Image Normalization</title>The next step is crucial to the image processing of the license plate. The matched filter is a sensitive algorithm which relies heavily on the resemblance between the characters on the license plate and the template images. Consequently, it is necessary that the template characters and the images of the license plate whose characters we want to recognize are standardized. Therefore, whenever an image of a license plate is input into the function, it is automatically rescaled to 256 by 400 pixels. The reason these dimensions were chosen is that it allows us to efficiently run the correlation between many templates, and the image of the license plate. Furthermore, the individual template dictionary characters are all re-scaled to 110 by 40 pixels. This choice is critical to the success of the algorithm as it preserves the ratio of the width to height of the characters.</para><para id="eip-261">After the size of the images is adjusted, all the images (both license plate and templates) are changed to black and white images. This ensure that all the pixels have a binary value of either zero or one, and this step is crucial to ensure the accuracy of the matched filter. Finally, the last step in the normalization process is to subtract a value of 0.5 from every pixel in the image. This step is performed to avoid the dilemma of obtaining a correlation result of zero in regions where there is a match. Even though an area might have pixel values of zeroes, it could be matching another area with similar pixel values, however, because the pixel values are zero, the result of the correlation comes to be zero as well. By subtracting a value of 0.5, we ensure that two areas that do match will both have either negative values or positive values; therefore, the correlation will yield a high positive score.</para><para id="eip-305"><figure id="bw-plate"><title>Black and White License Plate</title><media id="bwlp" alt="BW License Plate">
+    <image mime-type="image/jpeg" src="../../media/BW Plate.jpg"/>
+  </media>
+  <caption>License plate image converted to black and white.
+  </caption></figure>
+
+
+<figure id="gray-plate">
+  <title>Rescaled License Plate</title>
+  <media id="glp" alt="Gray License Plate">
+    <image mime-type="image/jpeg" src="../../media/Connexions Plate .jpg"/>
+  </media>
+  <caption>
+    Black and White License Plate rescaled by 0.5.  Black pixels rescaled from 0 to 0.5. White pixels rescaled from 1 to -0.5. 
+  </caption>
+</figure>
+
+</para><para id="eip-828"><title>3. Matched Filter Template Comparison</title>Now that the experimental components are set up, the matched filter can be applied. We first section the license plate to obtain sections with only one character on them. Once the sectioning is complete, we then perform the correlation between each section, and all the template images, and for each correlation, we save the scores of the correlation in an array. Once the algorithm is done running on a specific section, we compare the scores obtained, and pick the character associated with the highest score as the match at the current location.</para><para id="delete_me">
+     <!-- Insert module text here -->
+  </para>
+</content>
+
+</document>

@@ -1,0 +1,168 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Implementation: Detect Position of Drum Stick</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48491</md:content-id>
+  <md:title>Implementation: Detect Position of Drum Stick</md:title>
+  <md:abstract/>
+  <md:uuid>8c7ba4b9-d1c4-4c1d-8e52-b81fc680d07f</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.1259453701" strength="3">System Setup</link>
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.0390523267" strength="3">Implementation: Detecting a Hit</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section id="eip-871"><title>Image Processing--Calibration and Canny Edge Detection</title><para id="eip-60">For each snapshot taken from the video, the processing returns the coordinates of the drum stick position relative to the paper boundary.</para><para id="eip-560">Since we are only using a part of the screen (only the part of white paper). We need to calibrate a new coordinate system for our later position detection. Therefore, we first took a snapshot of the whole system to detect the edge of the paper and then chose a corner as the new origin.</para></section><section id="eip-321"><title>Intro to Canny Edge Detection</title><para id="eip-383">
+To detect the edge of the paper, we used canny edge detector.
+To better understand the method, instead of using the MATLAB command, we implemented the method on our own.
+</para></section><section id="eip-198"><title>Basic Steps for Canny Edge Detector</title><list id="eip-284"><item>Smooth with Gaussian Filter</item>
+<item>Compute Horizontal/Vertical Gradient</item>
+<item>Compute magnitude of gradient</item>
+<item>Non-Maximal Suppression</item>
+<item>Perform Hysteresis Threshold</item></list></section><note id="eip-134">We have our codes attached at the bottom.</note><figure id="import-auto-id6423294"><title>The image we implemented Canny Edge Detection</title><media id="import-auto-id1165781690789" alt="">
+        <image mime-type="image/png" src="../../media/graphics1-9573.png" height="432" width="576"/>
+      </media>
+    </figure><figure id="import-auto-id1165754314604"><title>After Canny Edge Detection</title><media id="import-auto-id1165773070695" alt="">
+        <image mime-type="image/png" src="../../media/graphics2.png" height="432" width="575"/>
+      </media>
+<caption>The edge of the pater has been detected fairly accurately. 
+  </caption></figure><para id="eip-893"><title>Boforehand</title>Before doing any image processing techniques on an image, we usually first smooth the image to get rid of most noise. To do this, we apply a Gaussian smoothing filter to the image.</para><para id="eip-362"><title>Image Gradient</title>An image gradient is a directional change in the intensity or color in an image. Edge detection utilized image gradient a lot since edges usually are places with discontinuity.</para><code id="eip-964" display="block"><title>Gradient calculations</title>% The filter that reduces noise
+f = 1/159*[2 4 5 4 2;4 9 12 9 4;5 12 15 12 5;4 9 12 9 4;2 4 5 4 2];
+n = imfilter(mg,f,'same');
+
+%Gradient Magnitude and Angle
+%x direction partial derivative
+mg = double(mg);
+Dx = [-1 0 1;-2 0 2;-1 0 1];
+% y direction partial derivative
+Dy = [1 2 1;0 0 0;-1 -2 -1];
+% Compute the gradient magnitude and the angle of the gradient
+n1 = imfilter(mg,Dx);
+n2 = imfilter(mg,Dy);
+% initialization
+s = [];
+theta = [];
+theta1= [];
+n1 = double(n1);
+n2 = double(n2);
+       
+for i = 1:size(m,1)
+    for j = 1:size(m,1)
+        % calculate the gradient magnitude
+        s(i,j) = sqrt((n1(i,j))^2+(n2(i,j))^2);
+        theta(i,j) = 360*(atan(n1(i,j)/n2(i,j)))/3.14;
+        % round angles
+ 
+        if (22.5&amp;lt;theta(i,j)&amp;amp;&amp;amp;theta(i,j)&amp;lt;=67.5) 
+            theta1(i,j) = 45;
+        elseif (67.5&lt;theta(i,j)&amp;&amp;theta(i,j)&lt;=112.5)
+            theta1(i,j) = 90;
+        elseif (112.5&lt;theta(i,j)&amp;&amp;theta(i,j)&lt;=157.5)
+            theta1(i,j) = 135;
+        elseif (157.5&lt;theta(i,j)&amp;&amp;theta(i,j)&lt;=202.5)||(0&lt;theta(i,j)&amp;&amp;...
+                theta(i,j)&lt;=22.5)||(337.5&lt;theta(i,j)&amp;&amp;theta(i,j)&lt;=360)
+            theta1(i,j) = 0;
+        elseif (202.5&lt;theta(i,j)&amp;&amp;theta(i,j)&lt;=247.5)
+            theta1(i,j) = 45;
+        elseif (247.5&lt;theta(i,j)&amp;&amp;theta(i,j)&lt;=292.5)
+            theta1(i,j) = 90;
+        else
+            theta1(i,j) = 135;
+        end
+    end
+end</code><para id="eip-726"><title>Non-Maximum Suppression</title>This method returns a single pixel width edge of the image. Basic algorithm is as follows:
+If pixel (x; y) has the highest gradient magnitude of the three pixels examined, it is kept as an edge. If one of the other two pixels has a higher gradient magnitude,then pixel (x; y) is not on the center of the edge and should not be classified as an edge pixel.
+In this way we could get a clear and thin edge of the image.</para><para id="eip-610">We round the angle to 0, 45, 90 and 135. With a specific angle value, we examine the maxima within the range of three pixel values in that direction (vertically, horizontally or diagonally).  By picking up the maxima and discarding non maxima points, the edge will be one pixel wide. In order to enhance the detection, we use hysteresis thresholding. </para><code id="eip-71" display="block"><title>Non-Maximum Suppression</title>s = padarray(s,[1 1]);
+theta1 = padarray(theta1,[1 1]);
+
+for k = 2:(size(m,1)+1)
+    for l = 2:(size(m,1)+1)
+        
+            if ((theta1(k,l) == 90) &amp;&amp; (s(k,l)== max(max(s(k+1,l),s(k,l)),...
+                s(k-1,l))))
+            mge(k,l) = s(k,l);
+        elseif ((theta1(k,l) == 0) &amp;&amp; (s(k,l)== max(max(s(k,l+1),...
+                s(k,l)),s(k,l-1))))
+            mge(k,l) = s(k,l);
+        elseif ((theta1(k,l) == 135) &amp;&amp; (s(k,l) == max(max(s(k+1,l+1),...
+                s(k,l)),s(k-1,l-1))))
+            mge(k,l) = s(k,l);
+        elseif ((theta1(k,l) == 45) &amp;&amp; (s(k,l) == max(max(s(k+1,l-1),...
+                s(k,l)),s(k-1,l+1))))
+            mge(k,l) = s(k,l);
+        end
+    end
+end
+</code><note id="eip-772">** When writing the MATLAB program for this part, finding the maxima at the boundary rows and columns require padding to the image matrix.  So we padded zeros to the matrix to ensure that the boundary edges could also be detected. </note><para id="eip-195"><title>Hysteresis Thresholding</title>Here we set two threshold values, a low threshold and a high threshold. The threshold values are important for the resulting image since if the low value is too low there could be invalid edges not being discarded, and if the high value is too high the edge will be discontinuous and some valid edges could be mistakenly discarded. Moderate threshold values are required. </para><code id="eip-437" display="block"><title>Hysteresis Thresholding</title>% Hysteresis Thresholding
+
+% Hysteresis is one way of solving this problem. Instead of choosing a single
+% threshold, two thresholds thigh and tlow are used.
+high = 105;
+low = 35;
+tmg = mge;
+% find the edge to be discarted
+
+index1 = find(mge&lt;=low);
+tmg(index1) = 0;
+for i = 3:(size(m,1)-2)
+    for j = 3:(size(m,1)-2)
+        % neighbors in a 3*3 region around it have gradient magnitudes
+        % greater than threshold high ,keep the edge
+        if (mge(i,j)&lt;high &amp;&amp; mge(i,j)&gt;low)
+            if ((mge(i-1:i+1,j-1:j+1)&gt;high) == zeros(3))
+                tmg(i,j)=0;
+                % If non of pixel (x; y)'s neighbors have high gradient
+                % magnitude but at least one falls between low and high,
+                % search the 5*5 region to see if any of these pixels have
+                % a magnitude greater than high. If so, keep the edge.
+            elseif ((mge(i-1:i+1,j-1:j+1)&gt;low) ~= [0 0 0;0 1 0;0 0 0])
+                if ((mge(i-2:i+2,j-2:j+2)&gt;high) == zeros(5))
+                    tmg(i,j)=0;
+                end
+            end
+        end
+    end
+end
+</code><note id="eip-959">It will be better if the webcam is placed in parallel with the paper; in this way the resulting edge detected will be a desired regular rectangular.</note><section id="eip-62"><title>Image Processing--template matching</title><para id="eip-641">After calibration, we are set up in the new coordinate system, which is the white paper region. We will detect drum stick position in this region.
+</para><para id="eip-570">To detect the position of drum stick, we used template matching. Since the stick head is black that has a high contrast from its surroundings (paper is white), we build a simple square template filled with black pixels. This template serves as a filter that helps us to find the position of stick head. We did 2D convolution between this template filter and the snapshot from the video. Euclidean distance is used to find the matching part. Below is a how we did template matching step by step:</para><para id="eip-252"><title>Matching</title>As the template moves along x/y axis of the image, assume that it has size of N by N; the template will compare all its pixel values with N by N matrix of the image it moves to.</para><list id="eip-400" list-type="enumerated" number-style="arabic" class="stepwise"><title>Basic algorithm steps</title><item>Set the minimum distance to infinity</item>
+<item>Iterate the template through the image</item>
+<item>Each iteration calculate for the euclidean distance between the template and the part of matrix the it iterates to</item>
+<item>If the distance is smaller than the current minimum distance, replace the minimum distance with that value</item>
+<item>Repeat the iteration until the 2D convolution is finished</item></list></section><code id="eip-39" display="block"><title>Template matching Code</title>i=0;
+
+while(i &lt; 100)
+    % trigger fun: start logging now
+    trigger(vid)
+    frame = getsnapshot(vid); % record the current frame
+    flushdata(vid);
+    delete(vid);
+    Im = double(frame);
+    Im = Im/max(max(Im)); % normalize the image
+    %%%%%%%%%%%%%%%%%%%%Processing Im%%%%%%%%%%%%%%%%%%
+    for m = 1:size(Im,1)-N+1
+        for n = 1:size(Im,2)-N+1
+            diff = sum(sum(Im(m:m+N-1,n:n+N-1)-temp));
+            if diff&lt;best_error
+                loc_x = m+N/2;
+                loc_y = n+N/2;
+            end
+        end
+    end
+    loc_y = loc_y-calib(1);
+    loc_x = loc_x-calib(2);
+    
+    position(i,1) = loc_x;
+    position(i,2) = loc_y;
+    %%%%%%%%%%%%%%%%%%%%EndProcessing%%%%%%%%%%%%%%%%%%
+    imshow(Im);
+    hold on
+    rectangle('Position',[size(Im,1)-loc_x,loc_y,N,N])
+    i=i+1;
+end
+</code></content>
+</document>

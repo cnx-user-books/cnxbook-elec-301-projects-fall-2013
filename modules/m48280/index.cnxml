@@ -1,0 +1,45 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Matched Filter Algorithm</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48280</md:content-id>
+  <md:title>Matched Filter Algorithm</md:title>
+  <md:abstract>Summary of the matched filter algorithm procedure.</md:abstract>
+  <md:uuid>f69f9abd-3ce5-4da4-a646-16f4c024d79b</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-620"><title>The Template Dictionary</title><para id="eip-842">The matched filter template dictionary is a vital component to the success of the program. This dictionary contains a sample of each character, A-Z and 1-9. Each image is obtained from an actual license plate image, converted to black and white, and resized to 256x400 pixels to reduce processing time. Our library of individual character samples was the result of cropping the characters out of several different license plate templates. We finally stored the template dictionary as a cell in MATLAB so we could run the program immediately when we input a license plate image.
+</para></section><section id="eip-623"><title>Matched Filter Algorithm</title><para id="eip-100">In order to identify characters on the license plate, we must run our test image through a series of steps (Figure 1). 
+</para><para id="eip-407"><title>1. Image Normalization</title>First, to match the template dictionary samples, every license plate is resized to the standard 256 by 400 pixels. Then, it is processed into a black and white image, with the pixel value 0 corresponding to black and pixel value 1 corresponding to white. This was done to set up for a 2D correlation between the two images.</para><para id="eip-481"><title>2. Image Partition</title>We then partition the image into 7 different sections, one for each individual character of the license plate. This was done to make the computation more efficient, as we will only compute the correlation between our template dictionary, which contains our library of all of the license plate characters, and the sections of the license plate that contain each individual character.</para><para id="eip-477"><title>3. Rescale Pixel Values</title>Our next step is to shift the pixel values from [0,1] to [-0.5,0.5]. When we compute the correlation between the partitions of the license plate and the template characters, this will ensure we obtain only positive values if the images are the same, and negative values in that region if they are different.</para><para id="eip-29"><title>4. Two-Dimensional Correlation</title>To check for matches between our two images, we perform a correlation between the test license plate and the each entry in the template dictionary. To set this up, our program rescales the pixel values by calculating 1/2 - each pixel value. Now the pixels to range from 1/2 (black) to -1/2 (white). 
+
+Next we flip the template character upside down and right to left and run the Matlab 'conv2' function. This is equivalent to a 2D correlation between the two images. Two negative numbers (black and black) will return a positive result and two positive numbers (white and white) will return a positive result as well. Through this method, we can obtain all the matches between the two images.
+
+<figure id="Formula">
+  <title>Equation for 2D Convolution</title>
+  <media id="Equation" alt="convo">
+    <image mime-type="image/png" src="../../media/Discrete Convolution.png"/>
+  </media>
+  <caption>
+     Equation for 2D Discrete Convolution.
+  </caption>
+</figure>
+
+
+</para><figure id="Diagram">
+  <title>Matched Filter Algorithm</title>
+  <media id="Filter" alt="LPR">
+    <image mime-type="image/png" src="../../media/Matched Filter Algorithm.png"/>
+  </media>
+  <caption>
+     Diagram of Matched Filter Algorithm for License Plate Recognition.
+  </caption>
+</figure>
+
+</section><section id="eip-25"><title>Program Results</title><para id="eip-417">
+
+On each license plate, we section the entire image to obtain each character (110x40). After running a convolution between all the test image sections and the template dictionary, we find the highest correlation values to determine the right character. Our program will return the identified characters in a string, in order of their location on the license plate. This string should match the characters on the actual license plate.
+
+</para></section></content>
+
+</document>

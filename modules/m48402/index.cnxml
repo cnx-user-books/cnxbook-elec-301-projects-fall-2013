@@ -1,0 +1,23 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Introduction</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48402</md:content-id>
+  <md:title>Introduction</md:title>
+  <md:abstract/>
+  <md:uuid>513c9138-78d2-4d20-8465-531f48aa70dc</md:uuid>
+</metadata>
+
+<content>
+  <para id="delete_me"><title>Overview</title><!-- Insert module text here -->
+
+The ear recognition system takes specific images of human ears as input and provides individual identification based on a personal database. The input images will be rescaled in Matlab and transformed into grayscale matrices. We implemented PCA (Principle Component Analysis) on the stored data in order to recognize specific patterns of ears.
+
+</para><para id="eip-713"><title>Motivation</title>Biometrics, the science of human physiological or behavorial characteristics, has been a great interest for a simplified identification techonology. However, there are many drawbacks of current biometrical solutions such as iris recognitions, fingerprint recognition and voice recognition. We would like to introduce a new biometrical technique that can overcome these drawbacks or assist some of them to be more accurate. As a new branch of biometrics, ear recognition offers a convenient individual identification compared to other ways such as fingerprint recognition, iris recognition, etc. It has unique advantages and great potential over other biometric methods for being a secure and accurate detecting procedure.  It also has a good balance between technical complexity and robustness.</para><para id="eip-690"><media id="dog_on_couch" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/1.jpg"/>
+		 
+</media>
+        </para></content>
+
+</document>

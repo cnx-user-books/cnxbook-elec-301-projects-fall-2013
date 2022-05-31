@@ -1,0 +1,32 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Future Work</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48281</md:content-id>
+  <md:title>Future Work</md:title>
+  <md:abstract>Result of experiments and future work that can be done.</md:abstract>
+  <md:uuid>2aeb75b7-ea20-415c-bf56-955d8671a02e</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-904"><title>LPR Challenges</title><para id="eip-110">While our program works efficiently for a subset of license plates, there are still various challenges that we must overcome to obtain a more robust program. These include: differences between different states' license plates, trouble characters such as "B" and "8", and environmental adaptation for a real world application. In this module, we will suggest potential avenues to pursue in order to address these challenges.
+</para></section><section id="eip-360"><title>The SIFT Algorithm</title><para id="eip-122">The Scale Invariant Feature Transform is an important algorithm that could help improve the robustness of our program, and allow it to be expanded to new applications and environments. This algorithm can identify unique features on specific license plates, and thus be used to rescale and reorient images that are taken from a different angle. SIFT can also help the program identify different types of license plates through the different pictures and fonts between different states' license plates. Because this difference could reduce accuracy, by using SIFT a larger dictionary can be created that will be accessed when SIFT identifies a unique type of license plate.
+</para><para id="eip-207">With SIFT, our program would be able to locate and isolate a license plate from an image of an entire car and parking garage by locating target features indicative of the specific type of plate. Therefore, even if an image has many other features outside of the license plate and is captured at an abnormal angle or position, SIFT could return a license plate image that is normally aligned and identify which dictionary to access based on the type of plate.</para></section><section id="eip-583"><title>Probabilistic Model</title><para id="eip-514">The matched filter program returns very similar correlation results for characters such as 'B' '6' '8' and 'D' as shown in Figure 1, which could lead to a incorrect identification. To address this issue, we can explore other means of representing or identifying each letter. One option could be running the matched filter program on different parts of characters for those with close correlation values. For example, while the whole image of 6 and 8 may look similar, the top halves of the two characters are more distinct. This could offer a second level of comparison for finer detection. Further work can also be done to create a model that utilizes probability and machine learning to choose the correct match. Through experimentation with large data sets, this method could offer a more accurate approach beyond our current deterministic model that simply chooses the highest correlation value.</para><figure id="Bcorr">
+  <media id="bc" alt="Bcorr">
+    <image mime-type="image/png" src="../../media/similar correlation values-1b90.png"/>
+  </media>
+  <caption>
+Similar correlation values found for template characters 6, 8, B, and D when testing position one (character B).
+
+  </caption>
+</figure>
+
+
+
+</section><section id="eip-195"><title>Environmental Adaptation</title><para id="eip-160">Certain hardware and environmental adjustments can be made to maintain accuracy. Cameras should be positioned and angled for a straight, front shot of the license plate for cars of all different sizes. Lighting should be normalized by placing a light close to the location of where the license plate will be so that the plate can still be viewed clearly at night time.
+</para></section><para id="delete_me">
+     <!-- Insert module text here -->
+  </para>
+</content>
+
+</document>

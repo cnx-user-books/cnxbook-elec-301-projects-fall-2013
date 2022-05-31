@@ -1,0 +1,160 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Rocket Flight Simulation</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48321</md:content-id>
+  <md:title>Rocket Flight Simulation</md:title>
+  <md:abstract>This section details the creation of the rocket simulation used to test the Kalman filter implementation.</md:abstract>
+  <md:uuid>4da1faab-4ddd-41d1-99b0-51de0648b105</md:uuid>
+</metadata>
+
+<content>
+    <section id="eip-963"><title>Introduction</title><para id="eip-860">In order to ensure that the apogee detecting filter works, we needed to test the filter with flight data. While we were able to get altimeter and barometer data from one rocket launch, we quickly realized the infeasibility of launching a model rocket multiple times in order to gather data. Our solution to this problem was to use the measured data from the one rocket launch to create an accurate simulation in MATLAB that would save both time and money.</para></section><section id="eip-575"><title>Simulation Synthesis</title><para id="eip-179">Because we knew the specifications of the rocket engine and the A/D quantization error of our sensors, we were able to easily create a simulation of rocket flight in MATLAB. The default measured values from the rocket data are as follows:
+</para><list id="eip-543"><item>The total length of rocket flight is 15s</item>
+      <item>Acceleration of the rocket while in flight rises linearly from g = -9.81m/s<sup>2</sup> to a peak value 160 m/s<sup>2</sup> in the span of 0.05s</item>
+      <item>This peak value is maintained for 0.35s</item>
+      <item>Acceleration decreases linearly from 160 m/s<sup>2</sup> to g in 0.5s</item>
+      <item>An acceleration of g is maintained for the rest of the rocket flight</item>
+    </list><para id="eip-75">Although the default parameters are listed above, the code below shows that parameters such as peak acceleration and length of rocket flight can be set externally. We used a parameterized model so that flights could be varied based on dynamics affecting flight, to avoid accidentally fitting overfitting our filter to the data.</para><para id="eip-499">------------------------------------------------------------------------------------------------------------------------------------------------------------</para><code id="eip-487" display="block">function rocket_sim(t_length,t_accmax,hold_a_max,t_g,a_peak)
+close all; % Close existing figures
+dt = 10^-3; % Time steps of 1ms
+
+% Default parameters that match conditions of measured rocket data
+t_length = 15;
+t_accmax = 0.05;
+hold_a_max = 0.35;
+t_g = 0.5;
+a_peak = 160;
+
+t = linspace(0,t_length,t_length*(1/dt)); % Create Time vector
+g = -9.81; % Acceleration due to gravity
+Acc_t = zeros(1,length(t)); % Initialize Acceleration vector
+Acc_t(1:round(t_accmax*(dt^-1))) = ... % Linear rise to peak acceleration
+    linspace(g,a_peak,round(t_accmax*(dt^-1)));
+
+Acc_t(round(t_accmax*(dt^-1))+1:round(hold_a_max*(dt^-1))) = a_peak;
+% Hold peak acceleration for set amount of time
+
+Acc_t(round(hold_a_max*(dt^-1))+1:round(t_g*(dt^-1)))=...
+    linspace(a_peak,g,round((t_g-hold_a_max)*(dt^-1))); % Linear decay to g
+
+Acc_t(round(t_g*(dt^-1))+1:end) = g; % Hold acceleration of g for remainder
+                                     % of flight
+figure;
+plot(t,Acc_t) % Show plot of simulated acceleration
+title('Simulated Acceleration of Rocket')
+</code><para id="eip-178">------------------------------------------------------------------------------------------------------------------------------------------------------------</para><para id="eip-640">Once an acceleration vector is created, a state transition matrix is created in order to derive velocity and position states and graphs are created. Using the position graph, we can determine the true time of apogee and use this time as a baseline for the effectiveness of various filters (see <link target-id="figure-01"/>, <link target-id="figure-02"/>, <link target-id="figure-03"/>).</para><para id="eip-737">------------------------------------------------------------------------------------------------------------------------------------------------------------</para><code id="eip-726" display="block">state_vecs = zeros(3,length(t)); % Initialize matrix for position,
+                                 % velocity and acceleration states
+trans_mat = [1 dt (1/2)*(dt^2); 0 1 dt; 0 0 1]; % Initialize state
+                                                % derivation matrix
+prv_states = zeros(3,length(t)); % Matrix for previous states
+prv_states(3,:) = Acc_t; % Set acceleration vector in previous states
+for i=1:length(t)-1
+    state_vecs(1,i) = trans_mat(1,:)*prv_states(:,i); % Derive position
+    state_vecs(2,i) = trans_mat(2,:)*prv_states(:,i); % Derive velocity
+    state_vecs(3,i) = trans_mat(3,:)*prv_states(:,i); % Derive acceleration
+    prv_states(1,i+1) = state_vecs(1,i); % Use current states to derive
+                                         % future values
+    prv_states(2,i+1) = state_vecs(2,i);
+end
+
+s_comp = state_vecs(1,:); % Position vector
+v_comp = state_vecs(2,:); % Velocity vector
+a_comp = state_vecs(3,:); % Acceleration vector
+figure;
+plot(t,s_comp) % Show plot of computed position
+title('Computed Position')
+figure;
+plot(t,v_comp) % Show plot of computed velocity
+title('Computed Velocity')
+figure;
+plot(t,a_comp) % Show plot of computed acceleration
+title('Computed Acceleration')
+[apogee,t_index] = max(s_comp); % Determine and display actual apogee
+disp('Actual Apogee occurs at t =') 
+disp(t(t_index))</code><para id="eip-262">------------------------------------------------------------------------------------------------------------------------------------------------------------</para><figure id="figure-01"><media id="c_pos2" alt="A plot of simulated position">
+      <image mime-type="image/png" src="../../media/c_pos2.png"/>
+   </media>
+</figure><figure id="figure-02"><media id="c_v" alt="A plot of simulated velocity">
+      <image mime-type="image/png" src="../../media/c_v.png"/>
+   </media>
+</figure><figure id="figure-03"><media id="c_acc" alt="A plot of simulated acceleration">
+      <image mime-type="image/png" src="../../media/c_acc2.png"/>
+   </media>
+</figure><para id="eip-125">Using the var() command in MATLAB, we determined that the measured data from the rocket launch got corrupted with Gaussian noise with mean=0 and different variances for position, velocity, and acceleration.</para><table id="eip-478" summary="Variance of position is 5.985. Variance of velocity is 2. Variance of acceleration is 0.0346">
+<tgroup cols="2"><colspec colnum="1" colname="c1"/>
+        <colspec colnum="2" colname="c2"/>
+        <thead>
+          <row>
+            <entry>
+              <emphasis effect="bold">State</emphasis>
+            </entry>
+            <entry>
+              <emphasis effect="bold">Variance</emphasis>
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>Position</entry>
+            <entry>5.985</entry>
+          </row>
+          <row>
+            <entry>Velocity</entry>
+            <entry>2</entry>
+          </row>
+          <row>
+            <entry>Acceleration</entry>
+            <entry>0.0346</entry>
+          </row>
+        </tbody>
+      
+</tgroup>
+</table><para id="eip-884">In addition, we introduced A/D quantization from our sensors into the position, velocity, and acceleration states. Specifically, the sensors introduced a time quantization of 50ms and an amplitude quantization in increments of three (see <link target-id="figure-04"/>, <link target-id="figure-05"/> <link target-id="figure-06"/>):</para><para id="eip-578">------------------------------------------------------------------------------------------------------------------------------------------------------------</para><code id="eip-714" display="block">% Measurement noise
+% Position corrupted with Gaussian noise with standard deviation = 5.985
+s_n = state_vecs(1,:)+(5.985.*randn(1,length(t)));
+% Velocity corrupted with Gaussian noise with standard deviation = 2
+v_n = state_vecs(2,:)+(2.*randn(1,length(t)));
+% Position corrupted with Gaussian noise with standard deviation = 0.0346
+a_n = state_vecs(3,:)+(0.0346.*randn(1,length(t))); 
+figure;
+plot(t,s_n) % Plot noisy position
+title('Noisy Position')
+figure;
+plot(t,v_n) % Plot noisy velocity
+title('Noisy Velocity')
+figure;
+plot(t,a_n) % Plot noisy acceleration
+title('Noisy Acceleration')
+%Quantization
+%Time Quantized to 0.05 seconds
+%Amplitude quantization is 3 meters
+t_q = t(1:50:end);
+s_n_q = floor(s_n(1,1:50:end)./3).*3;
+v_n_q = floor(v_n(1,1:50:end)./3).*3;
+a_n_q = floor(a_n(1,1:50:end)./3).*3;
+figure; 
+plot(t_q,s_n_q) % Plot noisy and quantized position
+title('Noisy and Quantized Position') 
+figure;
+plot(t_q,v_n_q) % Plot noisy and quantized velocity
+title('Noisy and Quantized Velocity')
+figure;
+plot(t_q,a_n_q) % Plot noisy and quantized acceleration
+title('Noisy and Quantized Acceleration')</code><para id="eip-602">------------------------------------------------------------------------------------------------------------------------------------------------------------</para><figure id="figure-04"><media id="nq_pos2" alt="A plot of Noisy and Quantized position">
+      <image mime-type="image/png" src="../../media/nq_pos2.png"/>
+   </media>
+</figure>
+<figure id="figure-05"><media id="nq_v" alt="A plot of Noisy and Quantized velocity">
+      <image mime-type="image/png" src="../../media/nq_v.png"/>
+   </media>
+</figure>
+<figure id="figure-06"><media id="nq_acc2" alt="A plot of Noisy and Quantized acceleration">
+      <image mime-type="image/png" src="../../media/nq_acc2.png"/>
+   </media>
+</figure>
+</section><section id="eip-454"><title>Conclusion</title><para id="eip-285">Once corrupted with noise and quantized, the simulation provides an accurate approximation of our measured data, and allows for multiple simulated, random, and parameterized rocket tests (see <link target-id="figure-07"/>): </para><figure id="figure-07"><media id="comparison" alt="A comparison of measured data and simulated data">
+      <image mime-type="image/png" src="../../media/comparison.png"/>
+   </media>
+</figure>
+</section></content>
+</document>

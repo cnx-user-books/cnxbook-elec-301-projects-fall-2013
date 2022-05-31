@@ -1,0 +1,15 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Limit and Solution</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48465</md:content-id>
+  <md:title>Limit and Solution</md:title>
+  <md:abstract/>
+  <md:uuid>b60b59a6-edd0-4679-8a5e-f4f76e8991c2</md:uuid>
+</metadata>
+
+<content>
+  <para id="eip-421">1.The result of our ear recognition is influenced considerably by the angle of camera and the angle of the light source. </para><para id="delete_me"><!-- Insert module text here -->
+2.Now we need to cut the photo of ear to the standard size we want manually, which is time-consuming and inconvenient for use.  </para><para id="eip-590"><title>solution to 1</title>To solve this problem in the future, we need to build a large database with photos of ears taken from all possible angles and all possible angles for light source in each case. Thus, it will be a comprehensive database. But now we did not have much time to build such a large database. </para><para id="eip-94"><title>solution to 2</title>We need to build an auto-detection system to find the image of ear from the original photo. This system should detect the position of person in the photo and then detect the head, and then the ear. After all these detections, this system will cut the photo to get the standard image for further recognition. </para><para id="eip-513"><title>Future improvement</title>(1)We can also apply PCA to face recognition or other recognitions, making a recognition system with both ear and other sort of recognitions. (2)We can build an auto-detection system which can find the ear automatically in the future.(3)Improve our algorithm or build a larger database to reduce the effect of light and hair, making our program more robust.</para></content>
+
+</document>

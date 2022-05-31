@@ -1,0 +1,25 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Results</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48307</md:content-id>
+  <md:title>Results</md:title>
+  <md:abstract>This module describes the effectiveness of the Kalman filter against other solutions.</md:abstract>
+  <md:uuid>c5122aff-93fa-4728-922c-3a6410b19754</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-760"><title>Accurate Detection of Apogee</title><para id="eip-419">Because the Kalman filter takes the physical model of a noisy system into account, it was more effective at predicting states of a system than other commonly used filters. While other filters rely only on current and past states, the Kalman filter's ability to estimate future states mitigate the delay and error which make it superior to other common solutions. In particular, with respect to our rocket flight, we compared the effectiveness of the Kalman filter with the other filter that successfully smoothed the signal, the Boxcar filter. As <link target-id="figure-01"/> shows, the Kalman filter has significantly less delay, almost matching the actual apogee line in shape, than the filtered output of a Boxcar filter. 
+ 
+</para><para id="eip-809">The Kalman filter does a remarkable job of removing noise from the position signal, but in order to actually determine apogee a decision rule is needed. Originally, the plan was to determine that the rocket was at apogee when its velocity was equal to zero. However, despite the fact that the accelerometer had very low variance compared to the barometer (which weighted it heavily in the Kalman gain), it had a significant bias term in it, which made the velocity term reach zero about a second before actual apogee. A more effective decision rule was to look for the position to have negative slope for three consecutive samples. Thus, apogee was defined as the time when the , position term was less than the previous position term, which in turn was less than the position term before that.
+</para><para id="eip-863">While the output of the Kalman filter has a negative amplitude bias compared when compared to actual apogee, it still accurately predicted the time of apogee, which is key to parachute deployment and minimizing forces on the rocket airframe and parachute.</para><figure id="figure-01"><media id="Kalman_Results" alt="Kalman Filter provides optimal apogee detection">
+      <image mime-type="image/png" src="../../media/Kalman_Results.png"/>
+   </media>
+</figure>
+<para id="eip-540"><link target-id="figure-02"/> makes the effectiveness of the Kalman filter even clearer. Across 200 flights with randomized parameters, the Kalman filter displayed a mean error in detecting apogee of 0.269 seconds while the Boxcar filter has a mean error of 1.52 seconds. In terms of velocity, the Kalman filter, on average, mitigates the velocity experienced by the rocket to 2.64 m/s, as opposed to the 14.9 m/s when a Boxcar filter is used. Effectively, the Kalman filter is about six times more accurate at determining apogee.</para><figure id="figure-02"><media id="Error_Compare" alt="Kalman Filter error much lower than boxcar">
+      <image mime-type="image/png" src="../../media/Error_Compare.png"/>
+   </media>
+</figure>
+</section></content>
+
+</document>

@@ -1,0 +1,19 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Estimated Features</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48368</md:content-id>
+  <md:title>Estimated Features</md:title>
+  <md:abstract/>
+  <md:uuid>22b60522-0ea2-4236-a513-0d6e09ddd618</md:uuid>
+</metadata>
+
+<content>
+    <para id="import-auto-id1168630575472">After taking the Biorthogonal Wavelet Transform (BWT), features were calculated from the transformed signal. The following figure represents the coefficients of the BWT, along with certain features highlighted. </para>
+    <figure id="import-auto-id1168630533045">
+      <media id="import-auto-id1168630540220" alt="">
+        <image mime-type="image/jpg" src="../../media/graphics1-098c.jpg" height="414" width="560"/>
+      </media>
+    </figure>
+    <para id="import-auto-id1168630537993">Since the BWT conserves the temporal properties of the ECG signal, the features on the raw ECG signal can simply be identified in the transformed signal. The first feature calculated is the R-peak, which is shown in red. This was calculated by iterating through the samples and calculating the local maxima at each QRS segment, after an approximate threshold was used. Once the R-peaks were determined accurately, the heart rate was then calculated. This was done by finding the average time difference between two peaks. Most heart rates were between 70 and 90 bpm. The detection of R-peaks and heart rate lead to the ability of calculating other peaks, particularly the S and J peaks. It is known from literature that the duration of the QRS complex is 60 ms (Thompson 1985). This provides a window for calculation of certain peaks such as the S peak, which would be 30 ms. The J peak is essentially the first inflection point after the S peak. Successful calculations of the S and J peaks are shown in blue and green respectively. These peaks are a basis for the calculation of the main features described earlier, such as the ST-segment and T-wave inversion. Limitations in obtaining accurate calculations of other features were additional noise especially in the QRS complex. The algorithms used to find other features were similar to the one used to calculate S and J peaks, however, this noise would often calculate multiple values, or miscalculate certain values. However, the pre-processing done to the raw ECG were essential to developing the first base peaks as shown. These results are the stepping stone to being able to synthesize a comprehensive amount of features in order to accurately and precisely diagnose Myocardial Infarction. </para>
+  </content>
+</document>

@@ -1,0 +1,32 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>System Setup</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48496</md:content-id>
+  <md:title>System Setup</md:title>
+  <md:abstract/>
+  <md:uuid>c8568b9c-22ba-49d6-9d62-22e478f030ad</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.0661675023" strength="3">Project Poster</link>
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.1439355155" strength="3">Implementation: Detect Position of Drum Stick</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section id="eip-546"><title>Major Components</title><para id="eip-840">In general, we divided our system design into three major components:</para><list id="eip-818"><item>Video processing, which tracks the current position of drum stick in real time;</item>
+<item>Audio processing, which detects the ‘hit’ of the drum stick and generates drum sounds;</item>
+<item>Integration of the previous 2 parts.</item>
+</list></section><section id="eip-919"><title>Required Materials</title><list id="eip-400"><title>There are some required materials for our system setup:</title><item>A webcam: a camera is used to videotape the paper and stick movements. In our experiment we simply used the webcam embedded in our laptop. However, other users may use any other types of cameras depending on individual requirements.</item>
+<item>A microphone: since the camera can only track the stick's position but not being able to know whether the stick really hits the paper to make sound, a microphone is used to detect when the stick actually hits the paper (when the player wants to play a note). We placed the microphone inside a sound-prove paper box to avoid noise interference.
+</item></list></section><figure id="import-auto-id1170583894329"><title>Virtual Drum Kit System Design</title><media id="import-auto-id1170584571854" alt="">
+        <image mime-type="image/png" src="../../media/graphics1-be8e.png" height="360" width="576"/>
+      </media>
+
+  <caption>
+     Notice how different parts are connected with each other.
+  </caption></figure><note id="eip-420">Our whole system works under the sequence numbered(from 1 to 4) in the above illustration.</note></content>
+</document>

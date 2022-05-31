@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Poster</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48424</md:content-id>
+  <md:title>Poster</md:title>
+  <md:abstract>Poster</md:abstract>
+  <md:uuid>2b2988fe-6edd-4e9c-915d-6fa960fa9423</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Application and Result</link>
+    </link-group>
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.8927629197" strength="3">Conclusion</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.2361220476" strength="3">Introduction</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <para id="eip-857"><media id="poster_s" alt="_poster_s" display="block">
+    <image mime-type="image/jpg" src="../../media/poster_new_s.jpg"/>
+  </media></para></content>
+
+</document>

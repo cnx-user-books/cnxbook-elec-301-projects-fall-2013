@@ -1,0 +1,28 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<title>Amplitude Analysis for Drop Speed</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48513</md:content-id>
+  <md:title>Amplitude Analysis for Drop Speed</md:title>
+  <md:abstract/>
+  <md:uuid>b0c0d01f-06c5-44b2-aa66-ae292d53bb8a</md:uuid>
+</metadata>
+
+<content>
+  <para id="eip-706">We performed an analysis on the volume of the song to determine how quickly the pieces in tetris should fall. The thinking behind this is that songs generally grow louder when they are growing more intense. Therefore, the game should become more intense when the song does.
+</para><section id="eip-151"><title>Envelope Generation</title><para id="eip-2">We compute a constant based on the relative volume of the song such that the current drop speed can be determined as a fraction of the maximum fall speed. We determine the relative volume from the songs envelope. The envelope is computed by first taking the normalized magnitude of the signal and then setting each second of the song to the max value in that segment of the song.
+</para><equation id="eip-527"><m:math>
+<m:mrow><m:mtext>S</m:mtext><m:mo>=</m:mo><m:mtext mathvariant="normal">Number of Samples in Signal</m:mtext></m:mrow>
+</m:math></equation><equation id="eip-871"><m:math>
+<m:mrow><m:mtext>Envelope[</m:mtext><m:mtext>τ</m:mtext><m:mtext>]</m:mtext><m:mo>=</m:mo><m:mfrac><m:mrow><m:munderover><m:mo>∑</m:mo><m:mrow><m:mtext>n</m:mtext><m:mo>=</m:mo><m:mtext>τ</m:mtext></m:mrow><m:mrow><m:mtext>τ</m:mtext><m:mo>+</m:mo><m:mtext>S</m:mtext></m:mrow></m:munderover><m:mtext>abs(signal[n])</m:mtext></m:mrow><m:mrow><m:mtext>S</m:mtext><m:mo>⋅</m:mo><m:mtext mathvariant="normal">max</m:mtext><m:mfenced open="(" close=")"><m:mtext>abs(signal)</m:mtext></m:mfenced></m:mrow></m:mfrac></m:mrow>
+</m:math></equation><para id="eip-895"><figure id="amp-plots"><title>Envelope from Raw Signal</title><media id="ENVELOPE" alt="Raw signal and Generated Envelope">
+    <image mime-type="image/png" src="../../media/evelopeplots.png"/>
+  </media>
+  
+<caption>The normalized envelope is generated from the raw signal by take max values from the absolute value of the signal</caption></figure></para></section><section id="eip-375"><title>Speed Calculation</title><para id="eip-352">
+Because the signal is normalized, the value of the envelope at time t is equivalent to the fractional value of the maximum speed that the current speed is to be set at.
+</para><equation id="eip-780"><m:math>
+<m:mrow><m:mtext>Speed[</m:mtext><m:mtext>τ</m:mtext><m:mtext>]</m:mtext><m:mo>=</m:mo><m:mtext mathvariant="normal">Envelope[</m:mtext><m:mtext>τ</m:mtext><m:mtext>] * Max Speed</m:mtext></m:mrow>
+</m:math></equation></section></content>
+
+</document>

@@ -1,0 +1,49 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Application and Result</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48427</md:content-id>
+  <md:title>Application and Result</md:title>
+  <md:abstract>Comparisons of two unsupervised machine learning applications using PCA, ICA, and NMF.</md:abstract>
+  <md:uuid>6fb4b667-3e01-4128-828a-fbb7b9db4751</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.1122426761" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.8927629197" strength="3">Conclusion</link>
+    </link-group>
+    <link-group type="example">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.3202604072" strength="3">Poster</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.2361220476" strength="3">Introduction</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.6530560145" strength="3"> ICA</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.8757021713" strength="3">NMF</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.9363427254" strength="3">PCA</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <para id="delete_me"><!-- Insert module text here -->
+We used these three algorithms for two interesting applications: Blind Source Separation (Cocktail Party Problem) and Hand-written Digit Recognition.</para><section id="eip-467"><title>Blind Source Separation (Cocktail Party Problem)</title><para id="eip-249">Imagine yourself at a cocktail party, and Haley is telling a boring story. You are much more interested in the gossip that Alex is telling Sam, so you tune out Alex and focus on Sam’s words. Congratulations: you have just demonstrated the human ability to solve the “cocktail party problem” — to pick out one thread of speech from the babble of two or more people. Here, we use machine learning techniques to achieve this goal.
+In this example, we have four different mixtures of four different sounds (CNN new material, Bach’s Symphony, Finnish Song and Pop Song Breakeven), mimicking the effect of having four microphones at four different places in a room (The number of mixtures should be equal to or greater than the number of sound sources for these algorithms to work). We feed this mixed data matrix (8 components in total, two channels for each audio file) into ICA, and the four components with the largest singular values corresponds to the four components we are looking for. The waveforms are plotted below. There’s little noise in the background, but it’s still very identifiable. PCA and NMF, however, only pick out one component.
+</para><para id="eip-895"><title>Source Waveforms</title><media id="source" alt="sources" display="block">
+    <image mime-type="image/png" src="../../media/Picture3.png"/>
+  </media></para><para id="eip-586"><title>Recovered Waveforms using fastICA</title><media id="ICA" alt="_ICA" display="block">
+    <image mime-type="image/png" src="../../media/Picture4.png"/>
+  </media></para><para id="eip-200">Another extended interesting feature: If we have two different mixtures of the two channels in a song, ICA will be able to extract the background music from a song (think karaoke).</para></section><section id="eip-264"><title>Hand-written Digit Recognition</title><para id="eip-391">Have you ever thought about how USPS handles millions of mails each day?  Obviously it will be great pain and tremendous work if postmen have to identify the postcodes people scribble manually and sort them into different bins. Their solution is to scan the handwritten addresses and utilize machine learning techniques to achieve automatic sorting. 
+Here we ask our algorithms to learn the most significant features of digit 8. The dataset contains 542 samples. Here's some example digits in the dataset:
+<media id="dataset" alt="dataset1" display="block">
+    <image mime-type="image/png" src="../../media/Picture1.png"/>
+  </media>
+</para><para id="eip-166">and the first eight components given by PCA, ICA and NMF:
+<media id="comp8" alt="comp_8" display="block">
+    <image mime-type="image/png" src="../../media/Picture2.png"/>
+  </media></para><para id="eip-484">The interpretation for these components is as follows: the first component captures the most significant feature of digit 8, meaning that most of the 8 in the dataset have this feature (looks like this), while the succeeding ones gives the second most significant feature etc. 
+We see that NMF picks out the most significant features of 8 in its first component, compared to ICA and NMF. It is a little hard to characterize the result besides just looking at it. If we do have labels (supervised learning), and turn this into a classification problem in which we may have more than one digits, the result can be more accurately characterized in terms of training error/test error.
+</para></section></content>
+
+</document>

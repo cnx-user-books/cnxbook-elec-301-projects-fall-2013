@@ -1,0 +1,63 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Feature Extraction</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48474</md:content-id>
+  <md:title>Feature Extraction</md:title>
+  <md:abstract/>
+  <md:uuid>7d02fe77-da56-4f58-8849-df6ac72e2ea0</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/cf8/module.2013-12-13.4099072361/module_text" strength="3">Introduction</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.7870186535" strength="3">Database</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.8374275107" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.3223488685" strength="3">Matlab Code</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.5673576316" strength="3">Our Team</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-13.4963514634" strength="3">Results</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-15.0916292634" strength="3">Poster</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <para id="delete_me"><!-- Insert module text here -->
+We start with Vulcan! Here is an original picture for our gesture.
+<figure id="cute-dog"><title>Vulcan</title><media id="dogpic" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/Untitled.jpg"/>
+  </media>
+  
+<caption>The Original "Vulcan" Gesture  </caption></figure></para><para id="eip-51">Convert image to grayscale.
+<figure id="cute-dog6">
+  <title>Grayscale</title>
+
+  <media id="dogpic6" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/grayscale.jpg"/>
+  </media>
+  <caption>
+     Vulcan converted to grayscale
+  </caption>
+</figure></para><para id="eip-969">Filter out noise and convert the image into a binary image.
+<figure id="cute-dog2"><title>Binary</title><media id="dogpic2" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/3-175c.jpg"/>
+  </media>
+  
+<caption>Binary Form of Vulcan
+  </caption></figure></para><para id="eip-755">Label the largest connected component in our image matrix and get the edge of our gesture.
+<figure id="cute-dog3"><title>Edge</title><media id="dogpic3" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/2-498a.jpg"/>
+  </media>
+  
+<caption>Edge of Vulcan
+  </caption></figure></para><para id="eip-133">Get polar form of the edge matrix. Divide the polar form into n(here n=8) equal bins and count number of 1’s(dots) in each bin.
+<figure id="cute-dog5"><title>Demo</title><media id="dogpic5" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/demo.jpg"/>
+  </media>
+  
+<caption>A demonstration of how our algorithm works
+  </caption></figure></para><para id="eip-598">Finally, we compare the data we get here with distribution of dots in our training set and get our predicted gesture of this image
+</para></content>
+
+</document>

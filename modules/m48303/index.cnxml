@@ -1,0 +1,17 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Future Work</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48303</md:content-id>
+  <md:title>Future Work</md:title>
+  <md:abstract/>
+  <md:uuid>12584045-5aef-4cca-9690-84019316c4fb</md:uuid>
+</metadata>
+
+<content>
+  <para id="delete_me"><title>Future Work</title><!-- Insert module text here -->
+  There are a couple next steps that can be taken once the algorithms and filters that extract the features from the input ECG signal have been developed.  The first potential step for future work is the development and hardening of the feature extraction filters and algorithms.  While much of the ECG signals between patients remains very similar, several environmental factors can affect the signal in ways that make it more difficult for algorithms to detect and identify the appropriate features in question.  The second identified potential step for future work is aggregating these extracted features and inputting them into a machine learning classifier.  This would create a system which would accept a patient’s ECG signal as an input and provide a calculated correlation value comparing it to the signal of healthy patients and patients with Myocardial Infarction.  This classification would be able to serve as a tool in the identification and treatment of patients with Myocardial Infarction.
+</para><para id="eip-555"><title>Algorithm Hardening</title>ECG measurements are taken in a variety of locations with different environmental noise.  Additionally, other factors like lead placement are generally similar between measurements but can vary from one case to another.  These variances have effects manifested by variations in the ECG signals recorded.  One of the major steps in potential future work would be hardening the algorithms for identifying the desired features such that they achieve a high success rate for a wide range of ECG input signals given these environmental variances.  This would also significantly help for processing a large batch of ECG signals while ensuring a high reliability of the outputs without fine-tuning for each individual signal.</para><para id="eip-318"><title>Machine Learning Classification</title>With a large set of features identified from a set of ECG input signals, one could then use the data to train a classifier to distinguish between healthy patients and those with Myocardial Infarction.  This potential next step of future work would involve aggregating a vector of identified ECG features for a large number of patients and passing them to a classifier along with each patient’s diagnosis.  The classifier could then be used with the filtering and processing system to serve as a tool to assist with the identification of Myocardial Infarction.  Part of the generated data set would be used to train the classifier and the other component would be used to test the effectiveness.  It would then be possible to compare the effectiveness of the classifier given different sets of feature inputs and determine which features are the best indicators for accurately identifying Myocardial Infarction in a patient.
+</para></content>
+
+</document>

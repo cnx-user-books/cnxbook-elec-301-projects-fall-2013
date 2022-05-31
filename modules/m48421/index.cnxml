@@ -1,0 +1,46 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Results</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48421</md:content-id>
+  <md:title>Results</md:title>
+  <md:abstract/>
+  <md:uuid>bac1b718-5398-444e-95fa-9e42e1126b9a</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.6991706123" strength="3">Feature Extraction</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.7870186535" strength="3">Database</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.8374275107" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-13.4099072361/module_text" strength="3">Introduction</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.3223488685" strength="3">Matlab Code</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.5673576316" strength="3">Our Team</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-15.0916292634" strength="3">Poster</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <para id="delete_me"><!-- Insert module text here -->
+ <figure id="cute-dog"><media id="dogpic" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/gestures.jpg"/>
+  </media>
+  
+<caption>Number of Correct Recognitions for Each Gesture
+  </caption></figure></para><para id="eip-492"><figure id="cute-dog1"><media id="dogpic1" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/bar1.jpg"/>
+  </media>
+  
+<caption>Correct Rate for Test Set
+  </caption></figure></para><para id="eip-792"><figure id="cute-dog3">
+  <media id="dogpic3" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/BAR2.jpg"/>
+  </media>
+  <caption>
+     Correct Rate for Training Set
+  </caption>
+</figure></para></content>
+
+</document>

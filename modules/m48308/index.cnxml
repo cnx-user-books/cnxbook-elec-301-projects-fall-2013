@@ -1,0 +1,15 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Biorthogonal Wavelet Transform - Selecting a Transform for ECG Signal Analysis</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48308</md:content-id>
+  <md:title>Biorthogonal Wavelet Transform - Selecting a Transform for ECG Signal Analysis</md:title>
+  <md:abstract>There are several signal transforms used in digital signal processing. Due to the non-stationary nature of the ECG signal, a transform that preserves the temporal occurrences of the signal’s frequencies is requisite for meaningful analysis.</md:abstract>
+  <md:uuid>951579ae-5766-4f4b-aecd-c520109847fb</md:uuid>
+</metadata>
+
+<content>
+  <para id="delete_me"><title>Properties of the Biorthogonal Wavelet Transform</title>Due to the non-stationary nature of the ECG signal, it is imperative to use a transform that preserves the temporal occurrences of the signal’s frequencies. The Fourier Transform, although commonly used in signal analysis, fails to do such, so it was necessary to select a transform with properties more suitable for this application. Properties of interest include orthogonality, wavelet function width, mother wavelet shape, and whether the wavelet function is complex or real valued. In ECG parameter extraction a non-orthogonal analysis involves high redundancy at larger scales. The width of the wavelet function, “directly acts on the analysis resolution that is for wavelet the result of balance between the length of analysis of samples window in time frequency axes. The shape of the mother wavelet is of interest as wavelet filtering can be viewed as an adapted filter looking for the highest correlation between the ECG signal to analyze and the considered wavelet. Lastly, “a complex wavelet providing information about both amplitude and phase is better suitable for oscillatory signal behavior whereas real valued wavelet function only returns a single signal modulus that can be used to isolate signal peaks and discontinuities. Further, “it is desirable that the basis functions (wavelets) be symmetric/antisymmetric. A symmetric basis will enable the detection of peak of wave as an extrema. In the case of antisymmetric basis, the peak of the wave is detected as a zero crossing. Second, minimizing the number of sign changes in the wavelet will facilitate the parameter extraction algorithm. In choosing between the various wavelet families, biorthogonal wavelets are a common choice for ECG signal analysis as they satisfy the above properties.
+</para></content>
+
+</document>

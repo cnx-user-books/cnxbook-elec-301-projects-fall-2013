@@ -1,0 +1,38 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Implementation</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48408</md:content-id>
+  <md:title>Implementation</md:title>
+  <md:abstract/>
+  <md:uuid>724b217f-b818-4805-a2cd-9af1c324c325</md:uuid>
+</metadata>
+
+<content>
+  <para id="eip-31"><title>System Schematics</title></para><para id="eip-113"><media id="dog_on_couch" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/2-0672.jpg"/>
+		 
+</media></para><para id="eip-579">Enrollment Process:
+Each sample takes several photographs of the same ear.
+Standarize the size of the photos, change them to grayscale, and get the mean image.
+Store the image to our database.
+Recognizing Process:
+Collect image
+Pre-processing
+Standarize the size of the input photo.
+Change it to grayscale.
+Feature extraction
+PCA processing.
+Compare with the image in our database.</para><para id="delete_me"><!-- Insert module text here -->
+ 
+<media id="dog_on_c9uch" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/4.jpg"/>
+		 
+</media>
+ </para><para id="eip-188"><title>From the external anatomy figure above, we can see: </title>external ear has enough details and complexities to help us recognize a particular ear. 
+ Based on statistics and researches, ears are unique for each human individual.. 
+</para></content>
+
+</document>

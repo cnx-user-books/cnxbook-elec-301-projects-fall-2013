@@ -1,0 +1,33 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<title>Frequency Analysis for Piece Selection</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48541</md:content-id>
+  <md:title>Frequency Analysis for Piece Selection</md:title>
+  <md:abstract/>
+  <md:uuid>ab6716b1-3dc0-42b1-859f-da62538a7eb1</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-24"><title>Interval Generation for Ten Second Sections</title><para id="eip-647"><title>Energy Computation</title>First, for a period of ten seconds the frequency spectrum is broken into bands of equal energy. The FFT of the signal is computed for the entire ten seconds and then bandlimited to the lower 10 KHz. The total energy across all frequencies is calculated. Because tetris has seven pieces, we will need seven frequency bands. By dividing the total energy by seven, we know have a target energy for each sections
+</para><equation id="eip-174"><m:math>
+<m:mrow><m:msub><m:mtext>E</m:mtext><m:mtext>total</m:mtext></m:msub><m:mo>=</m:mo><m:msubsup><m:mo>∫</m:mo><m:mn>0</m:mn><m:mrow><m:mn>10</m:mn><m:mtext mathvariant="normal">kHz</m:mtext></m:mrow></m:msubsup><m:msup><m:mfenced open="(" close=")"><m:mtext>FFT(Signal)</m:mtext></m:mfenced><m:mn>2</m:mn></m:msup></m:mrow>
+</m:math></equation><equation id="eip-548"><m:math>
+<m:mrow><m:msub><m:mtext>E</m:mtext><m:mtext>target</m:mtext></m:msub><m:mo>=</m:mo><m:mfrac><m:msub><m:mtext>E</m:mtext><m:mtext>total</m:mtext></m:msub><m:mn>7</m:mn></m:mfrac></m:mrow>
+</m:math></equation><para id="eip-869"><title>Interval Selection</title>A binary search algorithm is implemented to find the bounds of each frequency band such that the energy of each section will equal the target energy within a reasonable error. Ideally, we could compute exactly equal energies but we are limited by the number of samples in our seconds interval.
+
+
+</para><equation id="eip-296"><m:math>
+<m:mrow><m:msubsup><m:mo>∫</m:mo><m:mn>0</m:mn><m:mtext>I[1]</m:mtext></m:msubsup><m:msup><m:mfenced open="(" close=")"><m:mtext>FFT(Signal)</m:mtext></m:mfenced><m:mn>2</m:mn></m:msup><m:mo>±</m:mo><m:mtext>error</m:mtext><m:mo>=</m:mo><m:msubsup><m:mo>∫</m:mo><m:mtext>I[0]</m:mtext><m:mtext>I[1]</m:mtext></m:msubsup><m:msup><m:mfenced open="(" close=")"><m:mtext>FFT(Signal)</m:mtext></m:mfenced><m:mn>2</m:mn></m:msup><m:mo>±</m:mo><m:mtext>error</m:mtext><m:mo>=</m:mo><m:mo>⋯</m:mo><m:mo>=</m:mo><m:msubsup><m:mo>∫</m:mo><m:mtext>I[7]</m:mtext><m:mtext mathvariant="normal">10 kHz</m:mtext></m:msubsup><m:msup><m:mfenced open="(" close=")"><m:mtext>FFT(Signal)</m:mtext></m:mfenced><m:mn>2</m:mn></m:msup><m:mo>±</m:mo><m:mtext>error</m:mtext><m:mo>=</m:mo><m:msub><m:mtext>E</m:mtext><m:mtext>target</m:mtext></m:msub></m:mrow>
+</m:math></equation><para id="eip-331">Each of these bands is then assigned a different game piece.
+
+<figure id="piece-select"><title>Piece Selection Through Frequency Analysis</title><media id="pieceselect" alt="Spectrum divided into 7 sections for each piece">
+    <image mime-type="image/png" src="../../media/FreqeuncyGraph.png"/>
+  </media>
+  
+<caption>The spectrum is divided into seven equal energy sections for a ten second interval
+  </caption></figure></para></section><section id="eip-448"><title>Piece Selection for Half Second Sections</title><para id="eip-6">Once the frequency bands are computed for the section of the song, we compute the pieces. We take the FFT of a half-second samples and calculate the energy across each frequency band and find the maximum energy. The next piece is assigned accordingly.</para><equation id="eip-672"><m:math>
+<m:mrow><m:mtext>Piece</m:mtext><m:mo>=</m:mo><m:mtext>argmax</m:mtext><m:mfenced open="(" close=")" separators=""><m:mtext>i</m:mtext><m:mo>∈</m:mo><m:mtext>Peices,</m:mtext><m:msubsup><m:mo>∫</m:mo><m:mtext>I[i]</m:mtext><m:mrow><m:mtext>I[i</m:mtext><m:mo>+</m:mo><m:mtext>1]</m:mtext></m:mrow></m:msubsup><m:msup><m:mfenced open="(" close=")" separators=""><m:mtext>FFT(</m:mtext><m:msub><m:mtext>S</m:mtext><m:mtext>section</m:mtext></m:msub><m:mtext>)</m:mtext></m:mfenced><m:mn>2</m:mn></m:msup></m:mfenced></m:mrow>
+</m:math></equation><para id="eip-450">This process is repeated for each half second of the song. In theory, sections of the song with vocals will see more instances of the higher frequency pieces, while areas with bass guitar solos will be dominated by pieces from the lower frequencies.</para></section></content>
+
+</document>

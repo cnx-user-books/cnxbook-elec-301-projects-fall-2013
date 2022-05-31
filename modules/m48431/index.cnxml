@@ -1,0 +1,137 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Code</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48431</md:content-id>
+  <md:title>Code</md:title>
+  <md:abstract>code</md:abstract>
+  <md:uuid>489134f1-b2d3-4bf5-ac33-6c9c71997d5c</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Code</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <code id="eip-528" display="block"><title>Matlab Code</title>% Blind Source Separation
+
+% Four sounds are mixed together: (6 sec in total)
+% - Bach's Brandenburger concerto No.6, Allegro
+% - CNN News Material
+% - Breakeven
+% - Finnish Christmas Song: "A Sparrow on Christmas Morning"
+
+% Here we have four different mixing sounds samples. By performing ICA on
+% them, we can successfully recover each individual sound.
+
+if isempty(which('fastica'))
+    display('add path of FastICA toolbox');
+    addpath(strcat(pwd,'\FastICA_25'));
+end
+
+% read sound files in
+[x1,Fs] = audioread('Bach_mixed.wav');  % source #1 sound track
+[x2,Fs] = audioread('CNN_mixed.wav',[1 size(x1,1)]);  % source #2 sound track
+[x3,Fs] = audioread('Finnish_mixed.wav',[1 size(x1,1)]);  % source #3 track
+[x4,Fs] = audioread('Spanish_mixed.wav',[1 size(x1,1)]);  % source #4 track
+
+
+t = linspace(0,size(x1,1)/Fs,size(x1,1));  % time axis
+
+
+% ICA analysis using FastICA
+x = [x1,x2,x3,x4]';
+r = fastica(x,'g','gauss'); 
+
+ 
+% The output levels of this algorithm are arbitrary, normalize to 1
+r = r/max(max(abs(r)));
+
+% save output audio file
+audiowrite('PC1_ica.wav',r(1,:),Fs);
+audiowrite('PC2_ica.wav',r(2,:),Fs);
+audiowrite('PC3_ica.wav',r(3,:),Fs);
+audiowrite('PC4_ica.wav',r(4,:),Fs);
+
+
+% comparison with Nonnegative Matrix Factorization
+[W,H] = nmf(x,8);
+H = H/max(max(abs(H)));
+
+audiowrite('PC1_nmf.wav',H(1,:),Fs);
+audiowrite('PC2_nmf.wav',H(2,:),Fs);
+audiowrite('PC3_nmf.wav',H(3,:),Fs);
+audiowrite('PC4_nmf.wav',H(4,:),Fs);
+
+
+% comparison with PCA
+[U,D,V] = svds(x,8);
+V = V/max(max(abs(V)));   %normalize
+
+audiowrite('PC1_pca.wav',V(:,1),Fs);
+audiowrite('PC2_pca.wav',V(:,2),Fs);
+audiowrite('PC3_pca.wav',V(:,3),Fs);
+audiowrite('PC4_pca.wav',V(:,4),Fs);
+
+
+
+
+% Handwritten Digit Recognition
+% recognize number 8
+
+data = csvread('train8.txt');
+
+% plotting some images
+colormap('gray')
+for i=1:12
+    subplot(3,4,i)
+    mat = flipud(rot90(reshape(data(i,:),16,16)));
+    imagesc(mat)
+    axis off
+end
+
+
+figure(3)
+%NMF
+addpath('~/matlab/nmf_toolbox_ver1.4')
+[W,H] = nmf(zscore(data),12);
+colormap('gray')
+for i=1:8
+    subplot(3,8,i)
+    mat = flipud(rot90(reshape(H(i,:),16,16)));
+    imagesc(mat)
+    axis off
+end
+
+
+%ICA
+addpath('~/matlab/FastICA_2.5/FastICA_25')
+[S,A,Wh] = fastica(zscore(data),'lastEig',12,'g','tanh','maxNumIterations',1e6);
+colormap('gray')
+for i=1:8
+    subplot(3,8,i+8)
+    mat = flipud(rot90(reshape(S(i,:),16,16)));
+    imagesc(mat)
+    axis off
+end
+
+
+%PCA
+[U,D,V] = svds(zscore(data),8);
+colormap('gray')
+for i=1:8
+    subplot(3,8,i+16)
+    mat = flipud(rot90(reshape(V(:,i),16,16)));
+    imagesc(mat)
+    axis off
+end
+<caption>Matlab Code for Blind Source Separation and Hand-written Digit Recognition</caption></code><para id="delete_me">
+     <!-- Insert module text here -->
+  </para>
+</content>
+
+</document>

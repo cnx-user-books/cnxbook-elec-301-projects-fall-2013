@@ -1,0 +1,26 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Real Time Audio</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48283</md:content-id>
+  <md:title>Real Time Audio</md:title>
+  <md:abstract/>
+  <md:uuid>137416af-bd07-4a29-8094-9e9f58dbda34</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-529"><title>Overview</title><para id="eip-22">
+As the webcam theremin is purely digital, the creation of real-time audio is dependent on digital structures and processes rather than circuitry. In the implementation of the webcam theremin, we have optimized the responsivity of output and sensitivity to input of the instrument by working with effective structures and toolkits. The audio is implemented through a foundation of classes that are part of the <cite window="new" url="https://ccrma.stanford.edu/software/stk/index.html">Synthesis Toolkit</cite> package (herein referred to as STK).</para></section><para id="para-1">Our audio input and output schematic consists of a synthesized instrument, a circular buffer, and an output stream. The instrument and its wave table can be thought of as the alphabet to be written to the buffer; the buffer then is what continuously feeds the output stream. The buffer in this case allows audio output even without a new input, so that if one holds the object controlling the theremin still, the buffer will not empty and stop the audio.</para><section id="eip-906"><title>The Synthesis Toolkit</title><para id="eip-290">
+The Synthesis Toolkit is a digital audio development package that provides functionality to create a variety of instruments using several techniques. Classes in the STK model the clarinet, flute, mandolin, saxophone, and many other instruments. These instruments all work well with the theremin, as they have been designed by the STK to perform in real time. With the exception of the interface between the toolkit and the host's audio hardware, the entire package is platform independent and could be implemented in a variety of different settings. We decided it was important to synthesize our own sounds so we did so by a version of wavetable synthesis using a file looping class in the STK. This technique is highly flexible and could be used to re-pitch just about any sound. 
+</para></section><section id="eip-165"><title>Ring Buffer</title><para id="eip-802">
+The ring buffer is an efficient method for storing old audio samples and queueing in new samples while maintaining continuous audio playback. A ring buffer can be thought of as an array of memory spaces where the last one points back to the first. The buffer is filled with samples by the running theremin program and after it is filled, it is constantly and quickly overwritten with new input data when it comes available. The samples are periodically written from the buffer to the host computer's audio hardware. One of the most important considerations when developing a real-time system is maintaining low latency. If the audio were to lag behind the user’s command input, the delay between input and response would be disorienting and would render the instrument unplayable. This is an area where a ring buffer excels; for a ring buffer with a fixed maximum size that will not be modified, all commands are completed in constant time. This technique of storing an array of samples is popular because these memory accesses are faster than computing new values for each sample and therefore, the ring buffer is an important part of fast audio synthesis.
+<figure id="ring-buff-fig"><media id="ring-buff" alt="Ring Buffer">
+    <image mime-type="image/png" src="../../media/ring_buffer.png" width="350px"/>
+  </media>
+  
+<caption>Illustration of a Ring Buffer
+  </caption></figure></para></section><section id="eip-590"><title>Instrument Models</title><para id="eip-321">
+The synthesis toolkit uses digital waveguide models to synthesize nearly all of its physical instruments. The underlying principles of this method are digital delay lines that represent the physical geometry of the instrument, as well as filters that model frequency-dependent losses and dispersion in the medium. Sophisticated digital waveguides may also attempt to include non-linearities specific to that instrument. A great discussion of waveguide models can be found <cite window="new" url="https://ccrma.stanford.edu/software/stk/index.html">here</cite>.</para></section><section id="eip-821"><title>Wavetable Synthesis</title><para id="eip-820">
+The audio we used most often in the theremin was not synthesized by the STK but rather in Ableton software, and read into the STK using a technique called wavetable synthesis. This approach is a very popular method of making more complex audio because it re-pitches sounds that may have complicated spectral and temporal behavior. The principle behind this technique is to vary the "speed" at which values are read from a table of samples. Strictly speaking, the signal must be periodic and the table usually contains only a single cycle of the waveform. Given the length of the table, the fundamental frequency desired, and the sampling period, one can easily compute the rate at which the data pointer must be advanced through the buffer. This is a highly flexible technique that gives our theremin a range of sound profiles.</para></section></content>
+
+</document>

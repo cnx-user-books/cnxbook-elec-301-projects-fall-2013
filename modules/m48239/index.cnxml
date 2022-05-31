@@ -1,0 +1,18 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>What is a Theremin?</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48239</md:content-id>
+  <md:title>What is a Theremin?</md:title>
+  <md:abstract/>
+  <md:uuid>6ae8858a-b265-4a01-843e-5f0917d8fdc7</md:uuid>
+</metadata>
+
+<content>
+  <para id="delete_me">A theremin is an electronic musical instrument played by changing the position of the player's hands relative to two antennae. The instrument was created by Léon Theremin in 1928. The traditional theremin senses tiny changes in capacitance that modulate the frequency of two internal oscillators in a principle known as heterodyning. A video of Theremin playing his own instrument can be found below.</para><media id="theremin-video" alt="Theremin Video" display="block">
+<flash mime-type="application/x-shockwave-flash" src="//www.youtube-nocookie.com/v/w5qf9O6c20o?version=3&amp;hl=en_US&amp;rel=0" width="420" height="315"/>
+
+</media>
+<para id="eip-553">Our goal was to take the principles of the original theremin instrument and bring it into the 21st Century with the aid of some DSP. We wanted to create a computer instrument that needed no physical contact and that had two parameters of control: pitch and volume. Our project uses a computer webcam to detect the size, angle, and other parameters of an object and generates music using those values to control pitch and volume.</para></content>
+
+</document>

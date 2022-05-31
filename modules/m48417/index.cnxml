@@ -1,0 +1,95 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<title>Independent Component Analysis (ICA)</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48417</md:content-id>
+  <md:title>Independent Component Analysis (ICA)</md:title>
+  <md:abstract>A brief discussion of ICA (Independent Component Analysis).</md:abstract>
+  <md:uuid>80512d3b-6d3a-4a07-a82c-1159d11eef6b</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.8927629197" strength="3">Conclusion</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.3202604072" strength="3">Poster</link>
+    </link-group>
+    <link-group type="example">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Application and Result</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.1122426761" strength="3">Future Work</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.2361220476/" strength="3">Introduction and Motivation</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.9363427254" strength="3">PCA</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <section id="eip-380"><title>Independent Component Analysis</title><para id="eip-981">Imagine the data we have is a linear mixture of unknown latent factors and the factors are mutually independent and non-Gaussian, our goal is to find the underlying structure and identify these components. As shown before, PCA assumes Gaussianity. The condition <m:math display="block">
+ <m:mrow>
+  <m:msup>
+   <m:mi>U</m:mi>
+   <m:mi>T</m:mi>
+  </m:msup>
+  <m:mi>U</m:mi><m:mo>=</m:mo><m:mi>I</m:mi></m:mrow>
+</m:math>
+ and <m:math display="block">
+ <m:mrow>
+  <m:msup>
+   <m:mi>V</m:mi>
+   <m:mi>T</m:mi>
+  </m:msup>
+  <m:mi>V</m:mi><m:mo>=</m:mo><m:mi>I</m:mi></m:mrow>
+</m:math>
+ imply independence only when the data is Gaussian. ICA corrects this by looking for maximally independent components (rather than uncorrelated) ones. We know that uncorrlation is characterized by: <m:math display="block">
+ <m:mrow>
+  <m:mi>E</m:mi><m:mo stretchy="false">[</m:mo><m:mi>x</m:mi><m:mi>y</m:mi><m:mo stretchy="false">]</m:mo><m:mtext> </m:mtext><m:mo>=</m:mo><m:mtext> </m:mtext><m:mi>E</m:mi><m:mo stretchy="false">[</m:mo><m:mi>x</m:mi><m:mo stretchy="false">]</m:mo><m:mi>E</m:mi><m:mo stretchy="false">[</m:mo><m:mi>y</m:mi><m:mo stretchy="false">]</m:mo></m:mrow>
+</m:math>
+while independence is given by <m:math display="block">
+ <m:mrow>
+  <m:mi>E</m:mi><m:mo stretchy="false">[</m:mo><m:mi>f</m:mi><m:mo stretchy="false">(</m:mo><m:mi>x</m:mi><m:mo stretchy="false">)</m:mo><m:mi>g</m:mi><m:mo stretchy="false">(</m:mo><m:mi>y</m:mi><m:mo stretchy="false">)</m:mo><m:mo stretchy="false">]</m:mo><m:mo>=</m:mo><m:mi>E</m:mi><m:mo stretchy="false">[</m:mo><m:mi>f</m:mi><m:mo stretchy="false">(</m:mo><m:mi>x</m:mi><m:mo stretchy="false">)</m:mo><m:mo stretchy="false">]</m:mo><m:mi>E</m:mi><m:mo stretchy="false">[</m:mo><m:mi>g</m:mi><m:mo stretchy="false">(</m:mo><m:mi>y</m:mi><m:mo stretchy="false">)</m:mo><m:mo stretchy="false">]</m:mo></m:mrow>
+</m:math>
+The independence is stronger than uncorrelation because it measures the existence of any relationship. On the other hand, uncorrlation only measures linear relationship.
+Model for ICA looks like this:
+</para><equation id="eip-776"><m:math display="block">
+ <m:mtable columnalign="left">
+  <m:mtr>
+   <m:mtd>
+    <m:mi>X</m:mi><m:mo>=</m:mo><m:mi>A</m:mi><m:mi>S</m:mi>
+   </m:mtd>
+  </m:mtr>
+  <m:mtr>
+   <m:mtd>
+    <m:mover accent="true">
+     <m:mi>S</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    <m:mo>=</m:mo><m:mi>W</m:mi><m:mover accent="true">
+     <m:mi>X</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   </m:mtd>
+  </m:mtr>
+ </m:mtable>
+ 
+</m:math>
+</equation><para id="eip-991">where A is the mixing matrix and S is the source signals (rows of S independent) and we recover the signal using the “whitening” matrix W, where: <m:math display="block">
+ <m:mrow>
+  <m:mi>W</m:mi><m:mo>=</m:mo><m:msup>
+   <m:mi>A</m:mi>
+   <m:mrow>
+    <m:mo>−</m:mo><m:mn>1</m:mn></m:mrow>
+  </m:msup>
+  </m:mrow>
+</m:math>Popular algorithms do this by maximizing its distance from Gaussian using either entropy or neg-entropy (Gaussian has maximal entropy) – they are solved using quasi-Newton scheme. In addition to this, some often used contrast functions to Gaussian include 3rd moment skewness, 4th moment kurtosis (kurtosis is zero for a Gaussian random variable) and sigmoidal. We used FastICA. It’s efficient and converges quickly.
+<media id="fastICA" alt="fast_ICA" display="block">
+    <image mime-type="image/png" src="../../media/blind_source_sep.gif"/>
+  </media>
+(Figure Credit: http://zone.ni.com/reference/en-XX/help/372656B-01/lvasptconcepts/tsa_multivariate_stat_analysis/)
+
+        
+</para></section></content>
+
+</document>

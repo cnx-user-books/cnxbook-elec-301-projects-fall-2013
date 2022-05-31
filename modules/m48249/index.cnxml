@@ -1,0 +1,20 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Design Concept</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48249</md:content-id>
+  <md:title>Design Concept</md:title>
+  <md:abstract/>
+  <md:uuid>4436b8b6-0cea-4bfb-b19b-32d5f073d813</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-265"><title>Overall Goal</title><para id="eip-377">In our project, we attempted to simulate a theremin using a typical webcam.  Just as a theremin is controlled only by 2 values, our virtual theremin is also controlled by two values based on image processing techniques.</para><para id="eip-368">By tracking some object, the virtual theremin can determine x-position, y-position, angle, and size of that object in the image that a camera returns. Pitch and volume can be controlled by any two of these values. </para><para id="eip-id1171747997440">
+  The two normalized values representing pitch and volume will be passed to audio control which will then set volume and pitch to correspond to the values given by object tracking.
+</para></section><section id="eip-279"><title>Implementation Methodology</title><para id="eip-962"><title>Object Detection</title>For our object tracking, we decided to isolate objects based on their HSV (Hue Saturation Value) values.  This gives us the flexibility to use any object and the robustness to operate with almost any background in any sort of lighting.  All object tracking is done using OpenCV.
+</para><para id="eip-290"><title>Real Time Audio</title>The audio is implemented based on a foundation of classes that are part of the Synthesis Toolkit package (also referred to as STK).  Instrument models in the STK as well as other synthesized sounds are controlled by the STK and passed to the host computer's audio buffer, changing in time as the object being tracked changes its position.</para></section><list id="eip-353"><title>Specification Goals</title><item>Have multiple sounds possible</item>
+<item>Have multiple object usage possible</item>
+<item>Real-time video and audio output</item>
+<item>Steady object holds pitch and volume to within +/- 5% of normalized range</item></list></content>
+
+</document>

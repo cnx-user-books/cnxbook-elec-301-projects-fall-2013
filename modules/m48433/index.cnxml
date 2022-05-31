@@ -1,0 +1,31 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Conclusion</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48433</md:content-id>
+  <md:title>Conclusion</md:title>
+  <md:abstract>A brief comparison of specialties of PCA, ICA, and NMF.</md:abstract>
+  <md:uuid>c5a8038a-aecb-4a0e-a0b2-53aecb738d7e</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.3202604072" strength="3">Poster</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.2361220476" strength="3">Introduction</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.1122426761" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Application and Result</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.6530560145" strength="3"> ICA</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.8757021713" strength="3"> NMF</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.9363427254" strength="3"> PCA</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <para id="delete_me"><!-- Insert module text here -->
+From the intuition behind the mathematical formulation and the results given by our chosen dataset, we reach the conclusion that different matrix factorization techniques work well towards different ends:</para><para id="eip-861">NMF works well for modeling non-negative data such as images. It finds sparse and parts-based representation of the data.</para><para id="eip-815">ICA works well for finding independent sources when the data isn’t Gaussian.</para><para id="eip-80">PCA has much broader application than ICA and NMF; it is ideal for pattern recognition and dimension reduction.</para></content>
+
+</document>

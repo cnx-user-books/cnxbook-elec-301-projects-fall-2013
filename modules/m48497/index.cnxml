@@ -1,0 +1,52 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Implementation: Detecting a Hit</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48497</md:content-id>
+  <md:title>Implementation: Detecting a Hit</md:title>
+  <md:abstract/>
+  <md:uuid>e4948a4c-2d3f-4079-8d4c-daa22942bc06</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.1439355155" strength="3">Implementation: Detect Position of Drum Stick</link>
+      <link url="http://cnx.org/Members/xc7/module.2013-12-18.9974496513" strength="3">Implementation: Integration</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section id="eip-152"><title>Audio Processing</title><para id="eip-718">Each time the stick hits the paper, the sound impulse created by the collision is detected by the microphone. The sound impulse is used in conjunction with the coordinates of the drum stick position to generate the appropriate drum sound. We used template matching by calculating the Euclidean distance.
+</para><para id="eip-577"><title>Ambient Noise Level</title>Also called background noise level, is utilized to find the relative trigger level when a peak reached a certain height. We first test the ambient noise in the environment by recording a period of sound and take an average. The noise level will determine the sound trigger level. The larger the noise, the harder the player may need to hit the drum to produce a sound. </para></section><figure id="import-auto-id1165751680747"><media id="import-auto-id1165751694957" alt="">
+        <image mime-type="image/png" src="../../media/graphics1-ca2d.png" height="373" width="499"/>
+      </media>
+      <caption>The big spike contained in the red box indicates the stick hit the drum kit. 
+  </caption></figure><code id="eip-481" display="block"><title>Audio Input and Detecting Hit</title>% config and caliberate audio input
+% return ai audio object and th: threshhold volume calculated from
+% caliberation
+function [ai,th] = configAudio(samplePeriodConstant)
+   ai = analoginput('winsound');          % create an analog input device
+   addchannel(ai,1);
+   Fs=8000;
+   set(ai, 'TriggerType', 'manual');
+   set(ai, 'SamplesPerTrigger', 8000);
+   set(ai,'TriggerDelay',0);
+   set(ai,'TriggerDelayUnits','samples');
+   ai.TriggerRepeat = inf;
+   start(ai);
+   % wait ready
+   pause(1);
+   % trigger data
+   trigger(ai);
+   % get recent 1x8000 sample
+   data = getdata(ai);
+   % caliberated volume
+    th = mean(abs(data));
+   % new trigger length for constantly checking impulses
+   stop(ai);
+   set(ai, 'SamplesPerTrigger', samplePeriodConstant);
+   start(ai);
+   pause(1);  
+end</code></content>
+</document>

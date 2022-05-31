@@ -1,0 +1,28 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Principle Component Analysis</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48456</md:content-id>
+  <md:title>Principle Component Analysis</md:title>
+  <md:abstract/>
+  <md:uuid>2234a44f-e4ab-449e-9391-c54ce2617e39</md:uuid>
+</metadata>
+
+<content>
+  <para id="delete_me"><title>Description</title><!-- Insert module text here -->
+Principal component analysis (PCA) is a statistical procedure that uses orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components. 
+  </para><para id="eip-938"><media id="dog_on_couch5" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/5.jpg"/>
+		 
+</media></para><para id="eip-942"><media id="dog_on_couch6" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/6.jpg"/>
+		 
+</media></para><para id="eip-584"><media id="dog_on_couch" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/7.jpg"/>
+		 
+</media></para></content>
+
+</document>

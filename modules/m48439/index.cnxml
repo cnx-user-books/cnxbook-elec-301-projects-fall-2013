@@ -1,0 +1,23 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Conclusion and Future Opportunities</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48439</md:content-id>
+  <md:title>Conclusion and Future Opportunities</md:title>
+  <md:abstract/>
+  <md:uuid>4e229bf8-b8dd-49b5-b032-2b5cdf0efb17</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-956"><title>Conclusions</title><para id="eip-22">
+Our team delivered an instrument that was fully functional by the standards that we defined at the beginning of the project. It is relatively intuitive, robust, and platform independent. It further has the capability to imitate the control scheme of a physical-world theremin as well almost any interface you could think of. The biggest difficulties we ran into were in implementing real-time audio, specifically high quality wavetable sounds. The most trying part of the audio synthesis was navigating the interconnection of APIs on the host machine. The image processing stage could be further improved using principles of parallelization, machine learning, and even more advanced filtering techniques. The theremin is highly flexible in terms of modes of control and the types of sounds it can produce, and we dare say it's pretty fun to play.
+</para></section><section id="eip-639"><title>Conclusions</title><para id="eip-278">
+Our team delivered an instrument that was fully functional by the standards that we defined at the beginning of the project. It is relatively intuitive, robust, and platform independent. It further has the capability to imitate the control scheme of a physical-world theremin as well almost any interface you could think of. The biggest difficulties we ran into were in implementing real-time audio, specifically high quality wavetable sounds. The most trying part of the audio synthesis was navigating the interconnection of APIs on the host machine. The image processing stage could be further improved using principles of parallelization, machine learning, and even more advanced filtering techniques. The theremin is highly flexible in terms of modes of control and the types of sounds it can produce, and we dare say it's pretty fun to play.
+</para></section><section id="eip-925"><title>Future Opportunities</title><para id="eip-534">
+We'd like to extend this to implement the basic functionality of more common electronic instruments like the sample pad. We envision being able to queue up clips in real time to enhance the sound experience as well as change voices and playing modes in the midst of a session. We'd like to look into other methods of noise reduction and smarter algorithms for object detection, as well as adding a clean graphical user interface. The ultimate goal would be to port this into a mobile app that would be available for free. 
+</para></section><para id="delete_me">
+     <!-- Insert module text here -->
+  </para>
+</content>
+
+</document>

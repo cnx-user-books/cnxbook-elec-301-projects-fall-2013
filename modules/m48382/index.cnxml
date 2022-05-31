@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Introduction and Motivation</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48382</md:content-id>
+  <md:title>Introduction and Motivation</md:title>
+  <md:abstract>The Introduction and Motivation of the Project</md:abstract>
+  <md:uuid>98836990-9244-4486-9919-1bf81a04b208</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Application and Result</link>
+    </link-group>
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.9363427254" strength="3">PCA</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.6530560145" strength="3">ICA</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.8757021713" strength="3">NMF</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.3202604072" strength="3">Poster</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.1122426761" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.8927629197" strength="3">Conclusion</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section id="import-auto-id1165109474912">
+      <title><term id="import-auto-id1165107661208">Introduction and Motivation</term>       </title><para id="import-auto-id1165113066642"><title>Introduction and Background</title>In real life, often, we come across data that doesn’t have outputs (labels). In these cases, we strive to find the hidden structure and latent groupings within the data. This is when unsupervised machine learning comes into play. Popular unsupervised learning techniques include K-means, SOM (self-organizing map), various clustering algorithms (spectral clustering, hierarchical clustering) and graphical models. Here, we discuss unsupervised machine learning within the context of various matrix factorizations. The three algorithms we chose are <emphasis>Independent</emphasis> <emphasis>Component Analysis</emphasis> (<emphasis>ICA</emphasis>), <emphasis>Principal Component Analysis</emphasis> (<emphasis>PCA</emphasis>) and <emphasis>Nonnegative Matrix Factorization</emphasis> (<emphasis>NMF</emphasis>).  They are compared using two applications of unsupervised machine learning in real-life scenario: the <emphasis>cocktail party problem</emphasis> and the <emphasis>handwritten digit recognition</emphasis>. </para><para id="import-auto-id1165107635149"><title>Motivation</title>Let’s assume we have a data matrix of size nxp, where n corresponds to n iid observations and p corresponds to p features; very often, p is very large and the data is noisy. What we want is to find the relationship among the variables and uncover the major patterns underlying the data. What matrix factorization does is to reduce the dimensionality – It projects the data matrix into a lower dimension space so what seems random and messy in the high dimension becomes structured and grouped in lower dimension.</para></section>
+  </content>
+</document>

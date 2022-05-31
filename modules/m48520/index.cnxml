@@ -1,0 +1,37 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<title>Beat Analysis for Game Visualization</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48520</md:content-id>
+  <md:title>Beat Analysis for Game Visualization</md:title>
+  <md:abstract/>
+  <md:uuid>5a56798b-01d1-43bb-911d-9f197ed40f3e</md:uuid>
+</metadata>
+
+<content>
+  <para id="eip-545">One of the algorithms we chose to implement was a beat detections algorithm. In the game this maps to a pulsing visualization.</para><section id="eip-718"><title>Background</title><para id="eip-31">When a drum is hit, a spike in energy occurs across all frequencies. When a bass guitar is plucked, there is a spike in energy in the lower frequires. As these two instruments are commonly used in modern music to give a song rhythm or a beat, we decided to look at energy in the lower end of the spectrum. Theoretically, this should automatically filter out other spikes of energy created by a vocalist or electric guitar.
+</para></section><para id="delete_me"><!-- Insert module text here -->
+<figure id="beat-detection_metric"><title>Beat Detection on Metric's "Gimme Sympathy"</title><media id="gspic" alt="pic">
+   <image mime-type="image/png" src="../../media/tempoPlot1.png"/>
+  </media>
+  
+<caption>Beats outlined by blue bars
+  </caption></figure><figure id="beat-detection_floggingmolly"><title>Beat Detection on Flogging Molly's "Don't Shut 'Em Down"</title><media id="doneshut-pic" alt="pic">
+   <image mime-type="image/png" src="../../media/tempoPlot2.png"/>
+  </media>
+  
+<caption>Beats outlined by blue bars
+  </caption></figure></para><section id="eip-525"><title>Using Energy Comparisons to Detect Beats</title><para id="eip-956"><title>Energy Calculation</title>Because energy spikes when a beat occurs, it is fairly straight forward to implement an algorithm which compares an average local energy to an instantaneous energy. Because we only want to look at the low frequencies, we need to compute the FFT of the signal. Then, we compute the average local energy by taking the integral of the square of the FFT of a second in time over the number of samples. The instantaneous energy is calculated by taking the integral of the square of the FFT of a single sample.
+</para><equation id="eip-272"><m:math>
+<m:mrow><m:ci>&lt;</m:ci><m:msub><m:mtext>E</m:mtext><m:mtext>local</m:mtext></m:msub><m:mo>&gt;</m:mo><m:mo>=</m:mo><m:mtext>(</m:mtext><m:mtext mathvariant="normal">Length of Instant Signal in Time</m:mtext><m:mtext>)</m:mtext><m:mo>*</m:mo><m:msubsup><m:mo>∫</m:mo><m:mn>0</m:mn><m:msub><m:mtext>F</m:mtext><m:mtext mathvariant="normal">max</m:mtext></m:msub></m:msubsup><m:mtext>|FFT(</m:mtext><m:msub><m:mtext>S</m:mtext><m:mtext>local</m:mtext></m:msub><m:mtext>)</m:mtext><m:msup><m:mtext>|</m:mtext><m:mn>2</m:mn></m:msup></m:mrow>
+</m:math></equation><equation id="eip-80"><m:math>
+<m:mrow><m:msub><m:mtext>E</m:mtext><m:mtext>instant</m:mtext></m:msub><m:mo>=</m:mo><m:msubsup><m:mo>∫</m:mo><m:mn>0</m:mn><m:msub><m:mtext>F</m:mtext><m:mtext mathvariant="normal">max</m:mtext></m:msub></m:msubsup><m:mtext>|FFT(</m:mtext><m:msub><m:mtext>S</m:mtext><m:mtext>instant</m:mtext></m:msub><m:mtext>)</m:mtext><m:msup><m:mtext>|</m:mtext><m:mn>2</m:mn></m:msup></m:mrow>
+</m:math></equation><para id="eip-344"><title>Constant Calculation</title>Probabilistically speaking, if the instantaneous energy is greater than the local energy by a large enough quantity, we can say with a high likelihood that a beat has occured. The quantity is realized through the variance of the instantaneous energy to the average local energy. A constant is then calculated from the variance and we can see that the instantaneous energy needs to be a factor of the constant larger than the average local energy.</para><equation id="eip-886"><m:math>
+<m:mrow><m:msup><m:mtext>σ</m:mtext><m:mn>2</m:mn></m:msup><m:mo>=</m:mo><m:mtext>(</m:mtext><m:mtext mathvariant="normal">Length of Instant Signal in Time</m:mtext><m:mtext>)</m:mtext><m:mo>*</m:mo><m:mo>∫</m:mo><m:mtext>(</m:mtext><m:msub><m:mtext>E</m:mtext><m:mtext>instant</m:mtext></m:msub><m:mo>-</m:mo><m:mo>&lt;</m:mo><m:msub><m:mtext>E</m:mtext><m:mtext>local</m:mtext></m:msub><m:mo>&gt;</m:mo><m:msup><m:mtext>)</m:mtext><m:mn>2</m:mn></m:msup></m:mrow>
+</m:math></equation><equation id="eip-100"><m:math>
+<m:mrow><m:mtext>C</m:mtext><m:mo>=</m:mo><m:mtext>(−0.0025714</m:mtext><m:msup><m:mtext>σ</m:mtext><m:mn>2</m:mn></m:msup><m:mtext>)</m:mtext><m:mo>+</m:mo><m:mtext>1.5142857</m:mtext></m:mrow>
+</m:math></equation><equation id="eip-408"><m:math>
+<m:mrow><m:mo>&lt;</m:mo><m:msub><m:mtext>E</m:mtext><m:mtext>local</m:mtext></m:msub><m:mo>&gt;</m:mo><m:mo>≥</m:mo><m:mtext>C</m:mtext><m:mo>*</m:mo><m:msub><m:mtext>E</m:mtext><m:mtext>instant</m:mtext></m:msub></m:mrow>
+</m:math></equation></section><section id="eip-337"><title>Filtering Extra Beats</title><para id="eip-661">If a beat is detected, its sample number is recorded in a vector. If a beat spikes for multiple samples, multiple beats would be recorded which leads to an overestimation of the current tempo. To account for this, we merely look at the samples, detect a leading edge where the first beat is recorded, and ignore all subsequent sequential beats.</para></section></content>
+
+</document>

@@ -1,0 +1,29 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Future Work</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48447</md:content-id>
+  <md:title>Future Work</md:title>
+  <md:abstract>Potential Future developments on the project.</md:abstract>
+  <md:uuid>8517d1ba-8def-4df4-8a62-8871f0d9cb6e</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.9363427254" strength="3">PCA</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.8757021713" strength="3"> NMF</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.6530560145" strength="3">ICA</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.3202604072" strength="3">Poster</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.2361220476" strength="3"> Introduction</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.8927629197" strength="3"> Conclusion</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Application and Result</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <para id="delete_me"><title>Future Work</title>There are extensions to these popular matrix factorization techniques. We want to try these different matrix factorization techniques on different datasets in the future.
+  </para><para id="eip-527">When the dataset is nonlinear, kernel trick (it does a nonlinear mapping from the original space to an inner product space so that the observations will gain meaningful linear structure in the new space) can be combined with PCA to achieve a non-linear dimensionality reduction (called Kernel PCA).</para><para id="eip-625">In some cases, if we want a sparse set of coefficients (weights in the linear combination of variables equal zero), Sparse PCA can help us with that. </para><para id="eip-938">In other cases, if we want to find clusters where columns and rows can be grouped together as a cluster (think bi-clustering), two-way PCA can be helpful.</para></content>
+
+</document>

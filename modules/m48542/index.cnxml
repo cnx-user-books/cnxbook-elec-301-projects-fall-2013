@@ -1,0 +1,15 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Future Work</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48542</md:content-id>
+  <md:title>Future Work</md:title>
+  <md:abstract/>
+  <md:uuid>c68a9dbf-fa65-4e9c-93c7-d91d96cad73f</md:uuid>
+</metadata>
+
+<content>
+  <para id="delete_me">The most obvious area for future work is improving the algorithms. As mentioned in the results, all three features could use some fine tuning to improve their results.</para><para id="eip-391"><title>Analysis Improvement</title>New, more powerful analysis algorithms could be used to both find beats in the song and to separate the dominant instrument. We would like to perform instrument source separation to regain versions of the individual instrument signals in the song, then perform amplitude analysis on each of those separated signals to produce the next piece. Such a method for blind source separation <link url="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6069287" window="new">is described here.</link>
+</para><para id="eip-731">In order to improve our beat detection algorithm, we would have liked to separate the signal into many frequency bands, then run the energy peak analysis on each of those bands to produce a possible beat in each band. These beats could then be analyzed to determine the most likely beat of the song. Such an algorithm is described in the more advanced sections of the resource we used to create our beat detection algorithm. That reference <link url="http://archive.gamedev.net/archive/reference/programming/features/beatdetection/index.html" window="new">can be found here.</link></para><para id="eip-502"><title>Development of Analysis Library</title>The next major area for future work would be converting the sound analysis section of the program into a standalone library, which developers could build into their games to improve gameplay through audio driven events. Such a library would also contain a more abstracted and scalable version of the audio pipeline that would allow for more stages to be placed in the audio pipeline. These stages could allow for even more processing to be completed, but they also allow for efficient implementations of new features, such as the ability to have the next piece in a Tetris game be generated such that not only is it based on the dominant instrument, but that it also changes with the beat of the song.</para></content>
+
+</document>

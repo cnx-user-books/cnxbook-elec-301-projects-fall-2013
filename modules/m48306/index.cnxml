@@ -1,0 +1,28 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>References</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48306</md:content-id>
+  <md:title>References</md:title>
+  <md:abstract>References we used in our project</md:abstract>
+  <md:uuid>491d6969-ee8e-4610-aa1c-6b1ab67bb3ec</md:uuid>
+</metadata>
+
+<content>
+  <para id="delete_me"><list id="write-numbers-list" list-type="enumerated" start-value="1" mark-suffix=":" item-sep=".">
+  <title>References</title>
+
+
+<item> Welch, Greg, and Gary Bishop. An Introduction to the Kalman Filter. University of North Carolina at Chapel Hill, 2006. </item>
+<item> Schultz, David. Barometric Apogee Detection Using the Kalman Filter. NAR Research and Development Report, 2002. </item>
+<item> Schultz, David. Application of the Kalman Filter to Rocket Apogee Detection. NAR Research and Development Report, 2004 </item>
+<item> "Beginner's Guide to Rockets." Beginner's Guide to Rockets. &lt;https://www.grc.nasa.gov/www/k-12/rocket/bgmr.html&gt;. </item>
+<item> Milligan, Tim. "Phases of a Rocket's Flight." Apogee Rockets.&lt;http://www.apogeerockets.com/Tech/Phases_of_a_Rockets_Flight&gt;. </item>
+<item> "How Does the Parachute in a Model Rocket Work?" Curious About Astronomy:. &lt;http://curious.astro.cornell.edu/question.php?number=479&gt; </item>
+<item> Nakka, Richard. "Parachute Recovery System." Richard Nakka's Experimental Rocketry Site. &lt;http://www.nakka-rocketry.net/parasys.html&gt;. </item>
+<item> Culp, Randy. "The Flight of the Model Rocket." &lt;http://my.execpc.com/~culp/space/flight.html&gt;. </item>
+
+</list>
+</para></content>
+
+</document>

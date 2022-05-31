@@ -1,0 +1,314 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Principal Component Analysis (PCA)</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48394</md:content-id>
+  <md:title>Principal Component Analysis (PCA)</md:title>
+  <md:abstract>A brief discussion of PCA.</md:abstract>
+  <md:uuid>0f27f6de-b453-4544-b87a-3907db2e7a59</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.8927629197" strength="3">Conclusion</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.1122426761" strength="3">Future Work</link>
+    </link-group>
+    <link-group type="example">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Application and Result</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.3202604072" strength="3">Poster</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.6530560145" strength="3">ICA</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.2361220476" strength="3">Introduction</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section xmlns:m="http://www.w3.org/1998/Math/MathML" id="eip-731"><title>Principal Component Analysis</title><para id="eip-265">PCA is essentially just SVD. The only difference is that we usually center the data first using some grand mean before doing SVD. There are three perspectives of views for PCA. Each of them gives different insight on what PCA does.  
+</para><section id="eip-344"><title>Low-rank Approximation</title><equation id="eip-192"><m:math>
+ <m:mtable>
+  <m:mtr>
+   <m:mtd>
+    <m:munder>
+     <m:mstyle mathsize="140%" displaystyle="true"><m:mrow>
+      <m:mi>min</m:mi></m:mrow></m:mstyle>
+     <m:mi>Z</m:mi>
+    </m:munder>
+    <m:mtext> </m:mtext><m:mfrac>
+     <m:mn>1</m:mn>
+     <m:mn>2</m:mn>
+    </m:mfrac>
+    <m:mo>|</m:mo><m:mo>|</m:mo><m:mi>X</m:mi><m:mo>−</m:mo><m:mi>Z</m:mi><m:mo>|</m:mo><m:msubsup>
+     <m:mo>|</m:mo>
+     <m:mi>F</m:mi>
+     <m:mn>2</m:mn>
+    </m:msubsup>
+    
+   </m:mtd>
+  </m:mtr>
+  <m:mtr>
+   <m:mtd>
+    <m:mi>s</m:mi><m:mi>u</m:mi><m:mi>b</m:mi><m:mi>j</m:mi><m:mi>e</m:mi><m:mi>c</m:mi><m:mi>t</m:mi><m:mtext> </m:mtext><m:mi>t</m:mi><m:mi>o</m:mi><m:mtext> </m:mtext><m:mi>r</m:mi><m:mi>a</m:mi><m:mi>n</m:mi><m:mi>k</m:mi><m:mo stretchy="false">(</m:mo><m:mi>Z</m:mi><m:mo stretchy="false">)</m:mo><m:mo>≤</m:mo><m:mi>K</m:mi>
+   </m:mtd>
+  </m:mtr>
+ </m:mtable>
+ 
+</m:math>
+</equation><para id="eip-558">where Frobenius norm is a matrix version of sums of squared. This gives the interpretation of dimension reduction. Solution to the problem is:  
+<m:math>
+ <m:mrow>
+  <m:mi>Z</m:mi><m:mo>=</m:mo><m:mstyle displaystyle="true">
+   <m:munderover>
+    <m:mo>∑</m:mo>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow>
+    <m:mi>K</m:mi>
+   </m:munderover>
+   <m:mrow>
+    <m:msub>
+     <m:mi>U</m:mi>
+     <m:mi>k</m:mi>
+    </m:msub>
+    <m:msub>
+     <m:mi>d</m:mi>
+     <m:mi>k</m:mi>
+    </m:msub>
+    <m:msubsup>
+     <m:mi>V</m:mi>
+     <m:mi>K</m:mi>
+     <m:mi>T</m:mi>
+    </m:msubsup>
+    </m:mrow>
+  </m:mstyle></m:mrow>
+</m:math>
+
+
+</para><para id="eip-623">We do lose some information when doing dimension reduction, but the majority of variance is explained in the lower-rank matrix (The eigenvalues give us information about how significant the eigenvector is. So we put the eigenvalues in the order of the magnitude of the eigenvectors, and discard the smallest several since the contribution of components along that particular eigenvector is less significant comparing that with a large eigenvalue). PCA guarantees the best rank-K approximation to X. The tuning parameter K can be either chosen by cross-validation or AIC/BIC. This property is useful for data visualization when the data is high dimensional.</para></section><section id="eip-923"><title>Matrix Factorization</title><equation id="eip-686"><m:math display="block">
+ <m:mtable columnalign="left">
+  <m:mtr>
+   <m:mtd>
+    <m:munder>
+     <m:mrow>
+      <m:mi mathvariant="normal">minimize</m:mi></m:mrow>
+     <m:mtable columnalign="left">
+      <m:mtr>
+       <m:mtd>
+        <m:mrow>
+         <m:mi>U</m:mi><m:mo>,</m:mo><m:mi>D</m:mi><m:mo>,</m:mo></m:mrow>
+       </m:mtd>
+      </m:mtr>
+      <m:mtr>
+       <m:mtd>
+        <m:mi>V</m:mi>
+       </m:mtd>
+      </m:mtr>
+     </m:mtable>
+     
+    </m:munder>
+    <m:mrow><m:mo>{</m:mo> <m:mrow>
+     <m:mfrac>
+      <m:mn>1</m:mn>
+      <m:mn>2</m:mn>
+     </m:mfrac>
+     <m:msubsup>
+      <m:mrow>
+       <m:mrow><m:mo>‖</m:mo> <m:mrow>
+        <m:mi>X</m:mi><m:mo>-</m:mo><m:mi>U</m:mi><m:mi>D</m:mi><m:msup>
+         <m:mi>V</m:mi>
+         <m:mi>T</m:mi>
+        </m:msup>
+        </m:mrow> <m:mo>‖</m:mo></m:mrow></m:mrow>
+      <m:mi>F</m:mi>
+      <m:mn>2</m:mn>
+     </m:msubsup>
+     </m:mrow> <m:mo>}</m:mo></m:mrow>
+   </m:mtd>
+  </m:mtr>
+  <m:mtr>
+   <m:mtd>
+    <m:mi>s</m:mi><m:mi>u</m:mi><m:mi>b</m:mi><m:mi>j</m:mi><m:mi>e</m:mi><m:mi>c</m:mi><m:mi>t</m:mi><m:mtext> </m:mtext><m:mi>t</m:mi><m:mi>o</m:mi><m:mtext> </m:mtext><m:mtext> </m:mtext><m:mtext> </m:mtext><m:msup>
+     <m:mi>U</m:mi>
+     <m:mi>T</m:mi>
+    </m:msup>
+    <m:mi>U</m:mi><m:mo>=</m:mo><m:mi>I</m:mi><m:mtext> </m:mtext><m:mo>,</m:mo><m:msup>
+     <m:mi>V</m:mi>
+     <m:mi>T</m:mi>
+    </m:msup>
+    <m:mi>V</m:mi><m:mo>=</m:mo><m:mi>I</m:mi><m:mtext> </m:mtext><m:mo>,</m:mo><m:mi>D</m:mi><m:mo>∈</m:mo><m:mi>d</m:mi><m:mi>i</m:mi><m:mi>a</m:mi><m:msup>
+     <m:mi>g</m:mi>
+     <m:mo>+</m:mo>
+    </m:msup>
+    
+   </m:mtd>
+  </m:mtr>
+ </m:mtable>
+ 
+</m:math>
+</equation><para id="eip-52">This gives the interpretation of pattern recognition. The first column of U gives the first major pattern in sample (row) space while the first column of V gives the first major pattern in feature space. This property is also useful in recommender systems (a lot of the popular algorithms in collaborative filtering like SVD++, bias-SVD etc. are based upon this “projection-to-find-major-pattern” idea).
+</para></section><section id="eip-294"><title>Covariance</title><equation id="eip-892"><m:math>
+ <m:mtable columnalign="left">
+  <m:mtr>
+   <m:mtd>
+    <m:mi>max</m:mi><m:mtext> </m:mtext><m:msubsup>
+     <m:mi>V</m:mi>
+     <m:mi>K</m:mi>
+     <m:mi>T</m:mi>
+    </m:msubsup>
+    <m:msup>
+     <m:mi>X</m:mi>
+     <m:mi>T</m:mi>
+    </m:msup>
+    <m:mi>X</m:mi><m:msub>
+     <m:mi>V</m:mi>
+     <m:mi>K</m:mi>
+    </m:msub>
+    
+   </m:mtd>
+  </m:mtr>
+  <m:mtr>
+   <m:mtd>
+    <m:mi>s</m:mi><m:mi>u</m:mi><m:mi>b</m:mi><m:mi>j</m:mi><m:mi>e</m:mi><m:mi>c</m:mi><m:mi>t</m:mi><m:mtext> </m:mtext><m:mi>t</m:mi><m:mi>o</m:mi><m:mtext> </m:mtext><m:msubsup>
+     <m:mi>V</m:mi>
+     <m:mi>K</m:mi>
+     <m:mi>T</m:mi>
+    </m:msubsup>
+    <m:msub>
+     <m:mi>V</m:mi>
+     <m:mi>K</m:mi>
+    </m:msub>
+    <m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:msubsup>
+     <m:mi>V</m:mi>
+     <m:mi>K</m:mi>
+     <m:mi>T</m:mi>
+    </m:msubsup>
+    <m:msub>
+     <m:mi>V</m:mi>
+     <m:mi>j</m:mi>
+    </m:msub>
+    <m:mo>=</m:mo><m:mn>0</m:mn>
+   </m:mtd>
+  </m:mtr>
+ </m:mtable>
+ 
+</m:math>
+</equation><para id="eip-408"><m:math display="block">
+ <m:mrow>
+  <m:msup>
+   <m:mi>X</m:mi>
+   <m:mi>T</m:mi>
+  </m:msup>
+  <m:mi>X</m:mi></m:mrow>
+</m:math>here behaves like covariates for multivariate Gaussian. This is essentially an eigenvalue problem of covariance: <m:math display="block">
+ <m:mrow>
+  <m:msup>
+   <m:mi>X</m:mi>
+   <m:mi>T</m:mi>
+  </m:msup>
+  <m:mi>X</m:mi><m:mtext> </m:mtext><m:mo>=</m:mo><m:mtext> </m:mtext><m:mi>V</m:mi><m:msup>
+   <m:mi>D</m:mi>
+   <m:mn>2</m:mn>
+  </m:msup>
+  <m:msup>
+   <m:mi>V</m:mi>
+   <m:mi>T</m:mi>
+  </m:msup>
+  </m:mrow>
+</m:math>and <m:math display="block">
+ <m:mrow>
+  <m:mi>X</m:mi><m:msup>
+   <m:mi>X</m:mi>
+   <m:mi>T</m:mi>
+  </m:msup>
+  <m:mtext> </m:mtext><m:mo>=</m:mo><m:mtext> </m:mtext><m:mi>U</m:mi><m:msup>
+   <m:mi>D</m:mi>
+   <m:mn>2</m:mn>
+  </m:msup>
+  <m:msup>
+   <m:mi>U</m:mi>
+   <m:mi>T</m:mi>
+  </m:msup>
+  </m:mrow>
+</m:math>. Interpretation here is that we are maximizing the covariates in column and row space. 
+</para><para id="eip-146"><media id="PCA" alt="_PCA" display="block">
+    <image mime-type="image/gif" src="../../media/PCA_plot.gif"/>
+  </media>
+(Figure Credit: https://onlinecourses.science.psu.edu/stat857/node/35)</para></section><section id="eip-802"><title>The Intuition Behind PCA </title><para id="eip-111">The intuition behind PCA is as follows: The First PC (Principal Component) finds the linear combinations of variables that correspond to the direction with maximal sample variance (the major pattern of the dataset, the most spread out direction). Succeeding PCs then goes on to find direction that gives highest variance under the constraint of it being orthogonal (uncorrelated) to preceding ones. Geometrically, what we are doing is basically a coordinate transformation – the newly formed axes correspond to the newly constructed linear combination of variables. The number of the newly formed coordinate axes (variables) is usually much lower than the number of axes (variables) in the original dataset, but it’s still explaining most of the variance present in the data.
+</para></section><section id="eip-546"><title>Another Interesting Insight </title><para id="eip-14">Another interesting insight on PCA is provided by considering its relationship to Ridge Regression (L2 penalty). The result given by Ridge Regression can be written like this:</para><equation id="eip-871"><m:math>
+ <m:mrow>
+  <m:mover accent="true">
+   <m:mi>Y</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+  <m:mo>=</m:mo><m:mi>X</m:mi><m:msup>
+   <m:mover accent="true">
+    <m:mi>β</m:mi>
+    <m:mo>^</m:mo>
+   </m:mover>
+   
+   <m:mi>r</m:mi>
+  </m:msup>
+  <m:mo>=</m:mo><m:mstyle displaystyle="true">
+   <m:munderover>
+    <m:mo>∑</m:mo>
+    <m:mrow>
+     <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow>
+    <m:mi>p</m:mi>
+   </m:munderover>
+   <m:mrow>
+    <m:msub>
+     <m:mi>u</m:mi>
+     <m:mi>j</m:mi>
+    </m:msub>
+    <m:mfrac>
+     <m:mrow>
+      <m:mi>d</m:mi><m:mmultiscripts>
+       <m:mrow/>
+       <m:mprescripts/>
+       <m:mi>j</m:mi>
+       <m:mn>2</m:mn>
+      </m:mmultiscripts>
+      </m:mrow>
+     <m:mrow>
+      <m:msubsup>
+       <m:mi>d</m:mi>
+       <m:mi>j</m:mi>
+       <m:mn>2</m:mn>
+      </m:msubsup>
+      <m:mo>+</m:mo><m:mi>λ</m:mi></m:mrow>
+    </m:mfrac>
+    </m:mrow>
+  </m:mstyle><m:msub>
+   <m:mi>u</m:mi>
+   <m:mi>j</m:mi>
+  </m:msub>
+  <m:msup>
+   <m:mrow/>
+   <m:mi>T</m:mi>
+  </m:msup>
+  <m:mi>y</m:mi></m:mrow>
+</m:math></equation><para id="eip-770">The term in the middle here,<m:math>
+ <m:mfrac>
+  <m:mrow>
+   <m:mi>d</m:mi><m:mmultiscripts>
+    <m:mrow/>
+    <m:mprescripts/>
+    <m:mi>j</m:mi>
+    <m:mn>2</m:mn>
+   </m:mmultiscripts>
+   </m:mrow>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>d</m:mi>
+    <m:mi>j</m:mi>
+    <m:mn>2</m:mn>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:mi>λ</m:mi></m:mrow>
+ </m:mfrac>
+ 
+</m:math>
+, shrinks the singular values. For those major patterns with large singular values, lambda has little effect for shrinking; but for those with small singular values, lambda has huge effect to shrink them towards zero (not exactly zero, unlike lasso - L1 penalty, which does feature selection). This non-uniform shrinkage thus has a grouping effect. This is why Ridge Regression is often used when features are strongly correlated (it only captures orthogonal major pattern).
+PCA is really easy to implement - feed the data matrix(n*p) to the SVD command in Matlab, extract the PC loading(V) and PC score(U) vector and we will get the major pattern we want. 
+
+</para></section></section></content>
+</document>

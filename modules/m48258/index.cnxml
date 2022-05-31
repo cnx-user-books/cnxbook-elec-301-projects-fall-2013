@@ -1,0 +1,16 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Background</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48258</md:content-id>
+  <md:title>Background</md:title>
+  <md:abstract>Introduction to the License Plate Recognition project.</md:abstract>
+  <md:uuid>558b1f3c-3f6e-4c14-94d5-9bf7d29f6464</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-470"><title>Introduction</title><para id="eip-741">License plate recognition (LPR) presents an interesting image processing challenge with a relevant, real world application. While LPR technology exists for highway ticketing and police monitoring systems, expanding the functionality to more small scale applications can increase the versatility and affordability of the technology. Utilizing Matlab’s image processing capabilities, our team aims to harness the power of these available functions to develop a matched filter algorithm, and test the degree of accuracy in which it can identify the characters on a license plate. 
+</para></section><section id="eip-925"><title>Motivation</title><para id="eip-65">The inspiration for the project came from a parking technology project that some of our group members have been working on called ParkiT. Through conversations with parking garage operators throughout Houston, the team identified License Plate Recognition as one of the most valuable products. The technology is versatile and can be applied for a variety functions such as security, automatic entry and payment, and better management of the facility. Through this project our team will develop a foundation for an LPR algorithm, which can be improved upon and developed into a fully functioning system that can be tested in a garage trial next semester. More information about ParkiT can be found at www.parkitfast.com. 
+</para></section></content>
+
+</document>

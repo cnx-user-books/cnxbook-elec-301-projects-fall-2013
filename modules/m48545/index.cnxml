@@ -1,0 +1,18 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Implementing the Game</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48545</md:content-id>
+  <md:title>Implementing the Game</md:title>
+  <md:abstract/>
+  <md:uuid>541af99d-97ce-4b82-92a5-9112fd5fbcc6</md:uuid>
+</metadata>
+
+<content>
+    <para id="import-auto-id1164538113894">The game was built using <link url="http://java.com/en/about/">Oracle's Java programming language</link>. Java was chosen because it is designed to allow for easy Object Oriented Programming, which allows each component piece of the program to be built independently from the rest. In addition Java allowed for easy cross-platform development.</para><section id="eip-35"><title>Program Design</title><para id="eip-249">Each section of the program is represented by one of the rectangles in diagram, with the arrows indicating data flow. By separating each component of the program into its own section, they could be developed simultaneously without affecting one another.
+
+<figure id="import-auto-id"><media id="import-auto-id2" alt="">
+          <image mime-type="image/png" src="http://i.imgur.com/R7VgzkN.png" height="263" width="624"/>
+        </media>
+      <caption>The program consisted of a program interface, backend component, song loader, song analyzer, song player.</caption></figure>
+</para><para id="eip-708"><title>Program Interface and Backend Component</title>For the program interface, a GUI (Graphical User Interface) was built in Java Swing. Although Swing is not the most efficient platform for building a GUI in, it is one of the fastest to develop in, and is designed to integrate with the rest of the program well. The backend component handled communication between the song analysis sections of the program and the program interface. </para><para id="eip-540"><title>Song Loader, Analyzer, and Player</title>The song loader was responsible for loading the data from the MP3 file, and converting it into a format that the program could use. Once it was in this format, the loader was responsible for passing the data to the song analyzer, which was responsible for creating events based on the contents of the song. Finally, both the event data as well as the song buffer were fed into the song player, which was responsible for playing the file, as well as notifying the backend component about events so that it could forward them to the GUI. More information about the structure of this sound back end can be found in the Implementing a Pipelined Sound Engine section.</para></section></content>
+</document>

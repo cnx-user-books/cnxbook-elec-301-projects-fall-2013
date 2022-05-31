@@ -1,0 +1,12 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Conclusions</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48404</md:content-id>
+  <md:title>Conclusions</md:title>
+  <md:abstract/>
+  <md:uuid>2a994d9f-e5c6-448e-ae3c-3680edd562d3</md:uuid>
+</metadata>
+
+<content>
+    <para id="import-auto-id1172019487805">This project demonstrated the use of specific digital signal processing techniques to ultimately develop an accurate procedure to develop base features for detecting Myocardial Infarction. As Myocardial Infarction is a disease that must be diagnosed efficiently, it is imperative to develop a process to accurately and precisely extract features to classify patients. The pre-processing stage of this project focused on fine tuning a raw ECG signal in order to send it through a transform for the accentuation of features. This entailed using FIR low-pass filters as well as consecutive median filters in order to correct for external noise as well as the base wander. The new signal was then sent through a Biorthogonal Wavelet Transform which transformed the signal while maintaining the temporal values of the original signal. The newly refined signal served as a useful reference to analyze the ECG signal and accurately detect the base features, R,S,J peaks, for Myocardial Infarction. From these results, one can more easily detect and synthesize many features in order to train a classifier that can accurately detect Myocardial Infarction. </para></content>
+</document>

@@ -1,0 +1,48 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Experimental Results</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48278</md:content-id>
+  <md:title>Experimental Results</md:title>
+  <md:abstract>Results of experimentation with matched filter technique.</md:abstract>
+  <md:uuid>c3d56c95-db74-4750-85cc-b798071c3433</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-36"><title>Trial 1 Results</title><para id="eip-878">The first run through of our program showed promising results for the numbers, but less than stellar results for some of the letters. After several rounds of experimentation, we identified several ways to improve our algorithm. One major change was standard cropping for the template characters and the test license plate. While our original template dictionary images were cropped from the original images downloaded from the camera phone, our test images were obtained from a 256 by 400 pixel crop, thus there were slight differences in the images which lead to results that were not passing the matched filter test. Because matched filter is a very sensitive test, it responds to even the slightest changes that may not be detectable by a quick glance from a human eye.
+</para><para id="eip-448">Another adjustment that improved our results was flipping the image right to left and upside down before applying the 'conv2' function. This set up our image so that applying the function was equivalent to calculating a correlation, yielding significantly more sensitive and accurate results.</para></section><section id="eip-163"><title>Trial 2 Results</title><para id="eip-991">After changing our template dictionary samples so our dictionary and test images were cropped from a 256 by 400 pixel image and making adjustments to the image before applying ‘conv2’, we saw much better results. Our program accurately identifies characters on this type of Texas plate, returning the correct characters in order. Thus far it has produced accurate results on the five plates we have tested on, with an average processing time of 0.78252 seconds.
+</para></section><para id="eip-780">For one of our test images, license plate 'BP2F146' (Figure 1) we tested the template dictionary character '4' with the entire license plate. The results showed that the program found the location and match of '4' on the right place in the license plate, as shown in a heat map in Figure 2. This visual also shows the low correlation, represented by cooler colors, of the other pixels of the license plate with the template '4' character. Figure 3 shows the results of correlating position six (sixth character) on the license plate with the entire template dictionary. In this case, the sixth character is '4' and the stem plot shows that indeed the template '4' was chosen as the highest match and most probable choice. However, our experiments did reveal that other characters do not produce as distinct correlation results and may not offer an obvious match choice. When correlation values are close, our program will always choose the highest one which could possibly lead to an incorrect detection.
+
+<figure id="license-plate">
+  <title>Test License Plate</title>
+  <media id="lp" alt="Test License Plate">
+    <image mime-type="image/jpeg" src="../../media/Colored Plate.jpg"/>
+  </media>
+  <caption>
+     Image of Texas License Plate used for testing.
+  </caption>
+</figure>
+
+<figure id="four-corr"><title>Template Character '4' Identified and Located on License Plate</title><media id="fc" alt="4 Correlation">
+    <image mime-type="image/png" src="../../media/heat map.png"/>
+  </media>
+  
+<caption>Correlation of license plate with template character ‘4’ produces this heat map with correct location of '4' at position six.
+  </caption></figure></para><para id="eip-807"><figure id="six-corr"><title>'4' Identified as Most Likely Match at Position Six</title><media id="fmatch" alt="Position 6 Correlation">
+    <image mime-type="image/jpeg" src="../../media/4 as most likely.png"/>
+  </media>
+  
+<caption>Correlation results of position six on the test license plate with all the template characters, shows ‘4’ as the match. 
+
+  </caption></figure></para><para id="delete_me">
+     <!-- Insert module text here -->
+  </para><para id="eip-981">To further illustrate the degree of accuracy of our program, we have constructed a Confusion Matrix of the correlation results (Figure 4) between license plate characters and the template dictionary characters. After running our program on several test license plates, we obtain the average correlation value between each character and the template dictionary to create this data visualization that shows the highest matches in warm colors. Through this diagram, it can be seen that the close matches lie along the diagonal of the matrix, which is ideal as the diagonal represents the matching characters between the template dictionary and license plate. However, on this figure it is also easy to visualize the "trouble characters", such as the '8', 'B', and the 'D', which are slightly off the diagonal and may show similar high correlation values even when they are not the correct match.
+
+
+<figure id="confusion"><title>Visualization of High Correlation Values Between Matches</title><media id="c" alt="Confusion Matrix">
+    <image mime-type="image/png" src="../../media/confusion1.png"/>
+  </media>
+  
+<caption>Confusion Matrix illustrating the highest matches with warm colors.</caption></figure></para></content>
+
+</document>

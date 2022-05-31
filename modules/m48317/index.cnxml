@@ -1,0 +1,29 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Introduction</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48317</md:content-id>
+  <md:title>Introduction</md:title>
+  <md:abstract>Introduction of the EKG project.</md:abstract>
+  <md:uuid>58ed5de1-2256-42bf-b2c0-1a562af6c4bf</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-227"><title>Introduction</title><para id="eip-698">This project undertakes the challenge of extracting features from an EKG signal. The extracted features can later be used for diagnosing heart diseases like Myocardial Infarction (MI), also known as a heart attack. MI will be the context in which we ground our project. An EKG (electrocardiogram) measures the electrical activity of the human heart over a period of time. By taking in an EKG and  performing digital signal processing, we can extract the key features of the signal that can help determine a heart condition like MI.
+</para><para id="eip-928">The motivation for this project is the usefulness of its application. According to the American Heart Association’s, heart attacks are still the leading cause of death in the U.S. They estimate that around 8 million people suffer from MI in the U.S. The onset of MI can result in discomfort in the chest, severe chest pain, or sudden death.
+
+
+
+  </para><para id="eip-415">MI can be properly treated if detected early. Patients consult Cardiologists for diagnoses. However, human expertise not always available. By developing a DSP solution to diagnosing MI, early detection can be made available to more people.
+</para></section><section id="eip-573"><title>The problem</title><para id="eip-346">
+When a raw EKG signal is collected, the raw signal is not in a good form for analysis. Features cannot be extracted from this form accurately, and hence MI cannot be diagnosed accurately. 
+
+This is what a raw EKG signal looks like:</para><section id="eip-861"><title/><figure id="cute-dog"><media id="ekgraw" alt="ekg raw 1">
+    <image mime-type="image/jpeg" src="../../media/rawEKG1.jpg"/>
+  </media>
+  
+</figure></section><para id="eip-236">You can see that there is noise and the baseline wanders from the horizontal axis.
+
+The noise could have came from body movements, nearby electrical devices, and many other sources. Whatever the case, it is important to remove it. Also, it is important to correct the baseline wander, and see the frequency content of the signal, which can contain useful information.</para></section><para id="eip-279"><title>Objective</title>Our objective is to process the EKG signal and extract its key features. The key features will give us a comprehensive picture of the patient’s heart health. The features can then be used for things like training a machine learning classifier to predict whether a patient’s has a certain heart condition from his EKG signal. </para></content>
+
+</document>

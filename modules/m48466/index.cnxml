@@ -1,0 +1,33 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Our Team</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48466</md:content-id>
+  <md:title>Our Team</md:title>
+  <md:abstract/>
+  <md:uuid>290599b4-ecdb-4057-ae9e-640ac8e0f3c3</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.6991706123" strength="3">Feature Extraction</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.7870186535" strength="3">Database</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.8374275107" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-13.4099072361/module_text" strength="3">Introduction</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.3223488685" strength="3">Matlab Code</link>
+      <link url="xhttp://cnx.org/Members/cf8/module.2013-12-13.4963514634" strength="3">Results</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-15.0916292634" strength="3">Poster</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <section id="eip-890"><title>The Team</title><para id="eip-742">
+Chenxin(Tracy) Fu
+</para><para id="eip-75">Minyang Ma</para><para id="eip-37">Zihe Huang</para><para id="eip-716">Aoliang Zhi</para><para id="eip-851">Electrical and Computer Engineering, Rice University, 77005</para>
+</section><section id="eip-127"><title>Acknowledgement</title><para id="eip-732">
+We would like to thank Professor Rich Baraniuk for his great lectures and Kaushik Mitra for his contributive advice.
+</para></section></content>
+
+</document>

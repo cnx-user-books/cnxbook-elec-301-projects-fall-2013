@@ -1,0 +1,268 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Codes and Library</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48477</md:content-id>
+  <md:title>Codes and Library</md:title>
+  <md:abstract/>
+  <md:uuid>7194ea98-bc49-47bc-8084-48d80b9112ea</md:uuid>
+</metadata>
+
+<content>
+    <para id="import-auto-id1172590005587">%%%%%%%%%%%ELEC 301 Final Project%%%%%%%%%%%%%%%%%%%%%%%%%%%%</para>
+    <para id="import-auto-id1172589924545">%%%%%%%%%%%%%%%Ear Recognition%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</para>
+    <para id="import-auto-id8303390"/>
+    <para id="import-auto-id1172589117085">%Team: Zhenyu Guo, Zilong Liao, Xiangbang Sun, Zeyangyi Wang</para>
+    <para id="import-auto-id8925529"/>
+    <para id="import-auto-id1172590017944"/>
+    <para id="import-auto-id1172589028576">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</para>
+    <para id="import-auto-id1172590051346">%%%%%%%%%%%%%%%%%%%%%%%%%Overview%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</para>
+    <para id="import-auto-id1172590004622">%</para>
+    <para id="import-auto-id1172590062604">%We build a GUI for our ear recognition. This GUI has three</para>
+    <para id="import-auto-id1172588960370">%push buttons: choose a file, recognition and exit.</para>
+    <para id="import-auto-id4110731">%The first button let the user to choose an input file(.bmp)</para>
+    <para id="import-auto-id8857111">%to compare with existing library. The second button processes</para>
+    <para id="import-auto-id2054723">%the input file and gives the result that whether this ear is</para>
+    <para id="import-auto-id1172590044053">%in our library or not. The last buttons closes this program.</para>
+    <para id="import-auto-id1172589909174">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</para>
+    <para id="import-auto-id1172588982809"/>
+    <para id="import-auto-id1172589138987"/>
+    <para id="import-auto-id8698953"/>
+    <para id="import-auto-id1172589056271"/>
+    <para id="import-auto-id1172589097265"/>
+    <para id="import-auto-id1172588999897">%The following three functions are for generating an easy-to-use</para>
+    <para id="import-auto-id1172589199119">%GUI interface with three buttons.</para>
+    <para id="import-auto-id1172588901760"/>
+    <para id="import-auto-id8172722">function varargout = Untitled(varargin)</para>
+    <para id="import-auto-id7535602">% UNTITLED MATLAB code for untitled.fig</para>
+    <para id="import-auto-id8882634">%  UNTITLED, by itself, creates a new UNTITLED or raises the existing</para>
+    <para id="import-auto-id8657232">%  singleton*.</para>
+    <para id="import-auto-id1172589065619">%</para>
+    <para id="import-auto-id8679469">%  H = UNTITLED returns the handle to a new UNTITLED or the handle to</para>
+    <para id="import-auto-id8726514">%  the existing singleton*.</para>
+    <para id="import-auto-id1172589060036">%</para>
+    <para id="import-auto-id8854603">%  UNTITLED('CALLBACK',hObject,eventData,handles,...) calls the local</para>
+    <para id="import-auto-id1172588897636">%  function named CALLBACK in UNTITLED.M with the given input arguments.</para>
+    <para id="import-auto-id8776666">%</para>
+    <para id="import-auto-id1172589990863">%  UNTITLED('Property','Value',...) creates a new UNTITLED or raises the</para>
+    <para id="import-auto-id1172590003621">%  existing singleton*.  Starting from the left, property value pairs are</para>
+    <para id="import-auto-id1172589012580">%  applied to the GUI before untitled_OpeningFcn gets called.  An</para>
+    <para id="import-auto-id1172589202009">%  unrecognized property name or invalid value makes property application</para>
+    <para id="import-auto-id1172589911766">%  stop.  All inputs are passed to untitled_OpeningFcn via varargin.</para>
+    <para id="import-auto-id8745141">%</para>
+    <para id="import-auto-id1172589064808">%  *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one</para>
+    <para id="import-auto-id8944013">%  instance to run (singleton)".</para>
+    <para id="import-auto-id1172589932516">%</para>
+    <para id="import-auto-id8603188">% See also: GUIDE, GUIDATA, GUIHANDLES</para>
+    <para id="import-auto-id1172589985542"/>
+    <para id="import-auto-id1172589193600">% Edit the above text to modify the response to help untitled</para>
+    <para id="import-auto-id8904656"/>
+    <para id="import-auto-id1172589850716">% Last Modified by GUIDE v2.5 04-Dec-2013 17:00:55</para>
+    <para id="import-auto-id1172590040919"/>
+    <para id="import-auto-id1172590038347">% Begin initialization code - DO NOT EDIT</para>
+    <para id="import-auto-id1172589072367">gui_Singleton = 1;</para>
+    <para id="import-auto-id8934003">gui_State = struct('gui_Name',  mfilename, ...</para>
+    <para id="import-auto-id8728836"> 'gui_Singleton',  gui_Singleton, ...</para>
+    <para id="import-auto-id8949909"> 'gui_OpeningFcn', @untitled_OpeningFcn, ...</para>
+    <para id="import-auto-id1172590287267"> 'gui_OutputFcn',  @untitled_OutputFcn, ...</para>
+    <para id="import-auto-id1172588963915"> 'gui_LayoutFcn',  [] , ...</para>
+    <para id="import-auto-id1172589025694"> 'gui_Callback',  []);</para>
+    <para id="import-auto-id8745605">if nargin &amp;&amp; ischar(varargin{1})</para>
+    <para id="import-auto-id8843128"> gui_State.gui_Callback = str2func(varargin{1});</para>
+    <para id="import-auto-id8843020">end</para>
+    <para id="import-auto-id8893145"/>
+    <para id="import-auto-id1172590009693">if nargout</para>
+    <para id="import-auto-id8828781"> [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});</para>
+    <para id="import-auto-id8888888">else</para>
+    <para id="import-auto-id8857468"> gui_mainfcn(gui_State, varargin{:});</para>
+    <para id="import-auto-id8887101">end</para>
+    <para id="import-auto-id8846243">% End initialization code - DO NOT EDIT</para>
+    <para id="import-auto-id1172589898297"/>
+    <para id="import-auto-id2631744"/>
+    <para id="import-auto-id8836804">% --- Executes just before untitled is made visible.</para>
+    <para id="import-auto-id1172590019659">function untitled_OpeningFcn(hObject, eventdata, handles, varargin)</para>
+    <para id="import-auto-id1172589119027">% This function has no output args, see OutputFcn.</para>
+    <para id="import-auto-id1172589150700">% hObject  handle to figure</para>
+    <para id="import-auto-id8735666">% eventdata  reserved - to be defined in a future version of MATLAB</para>
+    <para id="import-auto-id1172589029614">% handles  structure with handles and user data (see GUIDATA)</para>
+    <para id="import-auto-id8690873">% varargin  command line arguments to untitled (see VARARGIN)</para>
+    <para id="import-auto-id8724512"/>
+    <para id="import-auto-id1172588900028">% Choose default command line output for untitled</para>
+    <para id="import-auto-id1172590014016">handles.output = hObject;</para>
+    <para id="import-auto-id8942436"/>
+    <para id="import-auto-id1172589082324">% Update handles structure</para>
+    <para id="import-auto-id8704706">guidata(hObject, handles);</para>
+    <para id="import-auto-id1172589140034"/>
+    <para id="import-auto-id1172589119839">% UIWAIT makes untitled wait for user response (see UIRESUME)</para>
+    <para id="import-auto-id1172590051489">% uiwait(handles.figure1);</para>
+    <para id="import-auto-id1172588825239"/>
+    <para id="import-auto-id1172589873495"/>
+    <para id="import-auto-id5191118">% --- Outputs from this function are returned to the command line.</para>
+    <para id="import-auto-id8787971">function varargout = untitled_OutputFcn(hObject, eventdata, handles) </para>
+    <para id="import-auto-id1172589181491">% varargout  cell array for returning output args (see VARARGOUT);</para>
+    <para id="import-auto-id1172589854345">% hObject  handle to figure</para>
+    <para id="import-auto-id1172590045560">% eventdata  reserved - to be defined in a future version of MATLAB</para>
+    <para id="import-auto-id8608092">% handles  structure with handles and user data (see GUIDATA)</para>
+    <para id="import-auto-id8733165"/>
+    <para id="import-auto-id8893853">% Get default command line output from handles structure</para>
+    <para id="import-auto-id1172588905845">varargout{1} = handles.output;</para>
+    <para id="import-auto-id1172589012248"/>
+    <para id="import-auto-id1172589073592"/>
+    <para id="import-auto-id1172589167418"/>
+    <para id="import-auto-id1172588978898"/>
+    <para id="import-auto-id1172588904994"/>
+    <para id="import-auto-id1172588922850"/>
+    <para id="import-auto-id8911296"/>
+    <para id="import-auto-id8522638"/>
+    <para id="import-auto-id1172588952504"/>
+    <para id="import-auto-id8713787">%The following three functions are about the functionalities of</para>
+    <para id="import-auto-id1172588998800">%the 3 buttons of our interface.</para>
+    <para id="import-auto-id1172589082485"/>
+    <para id="import-auto-id8724083"/>
+    <para id="import-auto-id8522636"/>
+    <para id="import-auto-id1172589081608">%Button 1 let the user to choose the input file.</para>
+    <para id="import-auto-id1172588933007">%Then, it change the input file to gray picture for further</para>
+    <para id="import-auto-id1172589097206">%use.</para>
+    <para id="import-auto-id8721075"/>
+    <para id="import-auto-id8716289">% --- Executes on button press in pushbutton1.</para>
+    <para id="import-auto-id8721296">function pushbutton1_Callback(hObject, eventdata, handles)</para>
+    <para id="import-auto-id1172588919295">% hObject  handle to pushbutton1 (see GCBO)</para>
+    <para id="import-auto-id1172588912396">% eventdata  reserved - to be defined in a future version of MATLAB</para>
+    <para id="import-auto-id1172588899691">% handles  structure with handles and user data (see GUIDATA)</para>
+    <para id="import-auto-id1172588904962"/>
+    <para id="import-auto-id1172588906528">global im;</para>
+    <para id="import-auto-id1172588906925">%get the path of the file, chosen by user</para>
+    <para id="import-auto-id1172588898720">[filename,pathname]=uigetfile({'.bmp'},'choose a file');</para>
+    <para id="import-auto-id1172588884727">str=[pathname,filename];</para>
+    <para id="import-auto-id8782561"/>
+    <para id="import-auto-id8782587"/>
+    <para id="import-auto-id8785357">%read it</para>
+    <para id="import-auto-id8664956">im=imread(str);</para>
+    <para id="import-auto-id1172588875693"/>
+    <para id="import-auto-id1172588875131"/>
+    <para id="import-auto-id8827537">%change this picture to gray and show it to user in specific </para>
+    <para id="import-auto-id8804336">%frame.</para>
+    <para id="import-auto-id8799722">im=rgb2gray(im);</para>
+    <para id="import-auto-id8650872">axes(handles.axes1);</para>
+    <para id="import-auto-id8799793">imshow(im);</para>
+    <para id="import-auto-id8792534"/>
+    <para id="import-auto-id8806552"/>
+    <para id="import-auto-id8812162"/>
+    <para id="import-auto-id8803050"/>
+    <para id="import-auto-id8788885"/>
+    <para id="import-auto-id8798185">%</para>
+    <para id="import-auto-id8815168"/>
+    <para id="import-auto-id8808410"/>
+    <para id="import-auto-id8674930">% --- Executes on button press in pushbutton2.</para>
+    <para id="import-auto-id8799679">function pushbutton2_Callback(hObject, eventdata, handles)</para>
+    <para id="import-auto-id8805908">% hObject  handle to pushbutton2 (see GCBO)</para>
+    <para id="import-auto-id8678968">% eventdata  reserved - to be defined in a future version of MATLAB</para>
+    <para id="import-auto-id8822065">% handles  structure with handles and user data (see GUIDATA)</para>
+    <para id="import-auto-id8685262"/>
+    <para id="import-auto-id8679647"/>
+    <para id="import-auto-id8673251">global im;</para>
+    <para id="import-auto-id8685834"/>
+    <para id="import-auto-id8692159">%get pictures in our library, change them to gray and store</para>
+    <para id="import-auto-id8687835">%them to imgdata</para>
+    <para id="import-auto-id8688228">imgdata=[];</para>
+    <para id="import-auto-id8699453">for i=1:2</para>
+    <para id="import-auto-id8693624"> for j=1:5</para>
+    <para id="import-auto-id8656446"> a=imread(strcat('C:\NewLib\P',num2str(i),'\',num2str(j),'.bmp'));</para>
+    <para id="import-auto-id8653266"> %a=rgb2gray(a);</para>
+    <para id="import-auto-id8687435"> %subplot(ceil(sqrt(5)),ceil(sqrt(5)),j)</para>
+    <para id="import-auto-id8651479"> %imshow(a)</para>
+    <para id="import-auto-id8824459"> %if i==2</para>
+    <para id="import-auto-id8639927"> % title('Training set','fontsize',18)</para>
+    <para id="import-auto-id8650014"> %end</para>
+    <para id="import-auto-id8819992"> %drawnow;</para>
+    <para id="import-auto-id8819313"/>
+    <para id="import-auto-id8799650"> %standarize the size of each image.</para>
+    <para id="import-auto-id8789121"> b=a(1:250*360);</para>
+    <para id="import-auto-id8824280"> b=double(b);</para>
+    <para id="import-auto-id8817884"> imgdata=[imgdata;b]; </para>
+    <para id="import-auto-id8788520"> %imgdata is a m*n matrix. Each row of it stores an image.</para>
+    <para id="import-auto-id8786952"> end</para>
+    <para id="import-auto-id8815097">end</para>
+    <para id="import-auto-id8787945"/>
+    <para id="import-auto-id8806373"/>
+    <para id="import-auto-id8791854">%get the mean image of images in imgdata</para>
+    <para id="import-auto-id8816883">imgdata=imgdata';</para>
+    <para id="import-auto-id8811726">imgmean=mean(imgdata,2);</para>
+    <para id="import-auto-id8792455"/>
+    <para id="import-auto-id8807909"/>
+    <para id="import-auto-id8792351">%get minus, a m*n matrix. Each row of it stores</para>
+    <para id="import-auto-id8787657">%(each image)-(mean image)</para>
+    <para id="import-auto-id8804515">for i=1:10</para>
+    <para id="import-auto-id8803693"> minus(:,i)=imgdata(:,i)-imgmean;</para>
+    <para id="import-auto-id8809625">end</para>
+    <para id="import-auto-id8821707"/>
+    <para id="import-auto-id8794969"/>
+    <para id="import-auto-id8822100">%conve is a m*m matrix</para>
+    <para id="import-auto-id8805544">%get coefficients from convex for later use.</para>
+    <para id="import-auto-id8792899">convex=minus'*minus;</para>
+    <para id="import-auto-id8786063">[coeff,latent,explained]=pcacov(convex');</para>
+    <para id="import-auto-id8799936"/>
+    <para id="import-auto-id8794572"/>
+    <para id="import-auto-id8792220">%get 95% power</para>
+    <para id="import-auto-id8803436">i=1;</para>
+    <para id="import-auto-id8805980">proportion=0;</para>
+    <para id="import-auto-id8816347">while(proportion&lt;95)</para>
+    <para id="import-auto-id8803979"> proportion=proportion+explained(i);</para>
+    <para id="import-auto-id8789199"> i=i+1;</para>
+    <para id="import-auto-id8672751">end</para>
+    <para id="import-auto-id8810726">p=i-1;</para>
+    <para id="import-auto-id8812412"/>
+    <para id="import-auto-id8674216"/>
+    <para id="import-auto-id8819563">i=1;</para>
+    <para id="import-auto-id8672322"/>
+    <para id="import-auto-id8673352">%make a coordinate system for the traits of ears.</para>
+    <para id="import-auto-id8668601">while(i&lt;=p&amp;&amp;latent(i)&gt;0)</para>
+    <para id="import-auto-id8821457"> base(:,i)=latent(i)^(-1/2)*minus*coeff(:,i);</para>
+    <para id="import-auto-id8676038"> i=i+1;</para>
+    <para id="import-auto-id8680469">end</para>
+    <para id="import-auto-id8677074">reference=base'*minus;</para>
+    <para id="import-auto-id8684798"/>
+    <para id="import-auto-id8685084"/>
+    <para id="import-auto-id8810196"/>
+    <para id="import-auto-id8669702">%test and show</para>
+    <para id="import-auto-id8675788">a=im;</para>
+    <para id="import-auto-id8679176">b=a(1:90000);</para>
+    <para id="import-auto-id8688157">b=double(b);</para>
+    <para id="import-auto-id8688192">b=b';</para>
+    <para id="import-auto-id8685405">object=base'*(b-imgmean);</para>
+    <para id="import-auto-id8691623">distance=10000;</para>
+    <para id="import-auto-id8675824">for k=1:10</para>
+    <para id="import-auto-id8686406"> temp=norm(object-reference(:,k));</para>
+    <para id="import-auto-id8693874"> if(distance&gt;temp)</para>
+    <para id="import-auto-id8690908"> which=k;</para>
+    <para id="import-auto-id8693802"> distance=temp;</para>
+    <para id="import-auto-id8681141"> end</para>
+    <para id="import-auto-id8698060">end</para>
+    <para id="import-auto-id8699382">if (which==10)</para>
+    <para id="import-auto-id8711429"> title('the person is not in the lib');</para>
+    <para id="import-auto-id8692116">end</para>
+    <para id="import-auto-id8711357">num1=ceil(which/5);</para>
+    <para id="import-auto-id8704992">num2=mod(which,5);</para>
+    <para id="import-auto-id8711536">if(num2==0)</para>
+    <para id="import-auto-id8705028"> num2=5;</para>
+    <para id="import-auto-id8704563">end</para>
+    <para id="import-auto-id8712608">I=imread(strcat('C:\NewLib\P',num2str(num1),'\',num2str(num2),'.bmp'));</para>
+    <para id="import-auto-id8697702">axes(handles.axes2);</para>
+    <para id="import-auto-id8699167">switch num1</para>
+    <para id="import-auto-id8713894"> case 1</para>
+    <para id="import-auto-id8700597"> imshow(I);</para>
+    <para id="import-auto-id8715860"> title('this is Gino');</para>
+    <para id="import-auto-id8716253"> case 2</para>
+    <para id="import-auto-id8714681"> imshow(I);</para>
+    <para id="import-auto-id8721582"> title('this is Mark ');</para>
+    <para id="import-auto-id8702919">end</para>
+    <para id="import-auto-id8720331"/>
+    <para id="import-auto-id8725870"/>
+    <para id="import-auto-id8726692">%button 3 just close the program.</para>
+    <para id="import-auto-id8725799">% --- Executes on button press in pushbutton3.</para>
+    <para id="import-auto-id8720474">function pushbutton3_Callback(hObject, eventdata, handles)</para>
+    <para id="import-auto-id8720760">% hObject  handle to pushbutton3 (see GCBO)</para>
+    <para id="import-auto-id8726799">% eventdata  reserved - to be defined in a future version of MATLAB</para>
+    <para id="import-auto-id8727371">% handles  structure with handles and user data (see GUIDATA)</para>
+    <para id="import-auto-id8727442">close(gcf);</para>
+  </content>
+</document>

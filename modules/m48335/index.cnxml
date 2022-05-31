@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Introduction</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48335</md:content-id>
+  <md:title>Introduction</md:title>
+  <md:abstract/>
+  <md:uuid>8a4e77b4-4a7a-46ca-9d6a-a03c9e33904f</md:uuid>
+</metadata>
+
+<content>
+  <section id="eip-487"><title>Principles of Rocketry</title><para id="eip-139">Model rocket flight involves a cocktail of mathematics and physics. The very best model rockets are built on careful calculations from the principles of physics, aerodynamics, thermodynamics, and gas dynamics.  For an optimal flight, the builder must consider all of these principles. Physics is used to predict the flight patterns and behavior of a rocket. Aerodynamics must be taken into account to ensure stable flight of the rocket, and to provide for the smoothest and highest flight possible. Finally, thermodynamics and gas dynamics are incorporated into the ignition and motor of the rocket, which actually propel the rocket. In our project, we incorporate the physics of the rocket in order to use digital signal processing to electronically detect rocket apogee. Apogee is the highest point in the rocket's flight and is the best time to deploy a parachute.
+</para></section><section id="eip-952"><title>Rocket Build</title><para id="eip-23">As seen in <link target-id="figure-01"/>, model rockets consist of a number of parts. At the very tip of the rocket is the nosecone, the streamline shaped provides the lowest drag in the air (this is to make the rocket as aerodynamic as possible). The shock cord holds together the parts of the rocket after parachute ejection (the rocket physically splits in half and ejects the parachute, which allows the parts to float safely to the ground). The parachute is one of several recovery methods, most often used. For our purposes, it is both applicable to our larger rocket as well as cost efficient. The launch lug, guides the rocket along the launch rod – part of the tripod-like stand that the rocket is launched from – until the fins start working. The body tube is where devices, such as barometers, altimeters, accelerometers, and other electronics can be situated. Flame-proof recovery wadding is padded in between the area where the parachute and the motor are in order to protect the parachute and other devices from the motors hot ejection gases. The fins of the rocket, located externally on the body tube, provide aerodynamic stability. The motor, finally, accelerates the rocket upwards until it burns out. 
+
+<figure id="figure-01"><title>Rocket Build</title><media id="rocketbuild" alt="diagram of typical model rocket">
+      <image mime-type="image/png" src="../../media/rocket_build.gif"/>
+   </media>
+   
+<caption>Rocket Model Diagram. From: http://www.manitobarocketry.org/AboutModelRocketry.html</caption></figure> 
+
+Model rockets are usually categorized according to the motors they use. Motor classes are determined by the motor impulse, or the area under the thrust-time curve. The more powerful the motor, the further along the alphabet the class is. Motors start at 1/4A class and increase, to 1/2A, A, B, and so on. “Model Rockets” are officially classed as rockets with “G” motors or under. Rockets which use larger motors are typically called "high-powered rockets." (The rocket which this study centers around flew on an "I” motor).
+The rocket for this study incorporated an Arduino board paired with a barometer and accelerometer as its payload in order to take data for DSP processing.</para></section><section id="eip-363"><title>Flight Path and Apogee</title><para id="eip-304">The flight path of a rocket has several main components. Firstly, we have ignition and liftoff, which are parts of the launch phase.  The thrust phase, or the powered flight phase, is the phase in which the motor or engine is burning in order to push the rocket into the air. It is accelerating at this phase. Part three is the burnout, the exact moment in which the engine’s power has been completely expended and the rocket is no longer providing its own thrust. Right after the burnout, the model rocket ascends into the coasting phase, in which it starts slowing down from its top speed. Gravitational pull works against the rocket, and so it decelerates until it reaches Apogee. It in <link target-id="figure-02"/> as “Ejection,” because, ideally, this is where parachute ejection should occur. In model rockets, apogee is the highest point of a rocket’s flight. On a parabolic flight pattern, this is the point where the rocket reaches its maximum height, and where velocity equals zero. Finally, the rocket reaches its recovery phase, where the parachute provides air resistance to counteract the force of gravity pulling on the rocket. It then drifts to the ground, where the model rocket can be recovered and recorded data logged.
+
+<figure id="figure-02"><title>Rocket Flight Path</title><media id="rocketflightpath" alt="rocket flight path diagram">
+      <image mime-type="image/gif" src="../../media/flight_diagram.gif"/>
+   </media>
+   
+<caption>Model Rocket Flight Path Diagram. From: http://my.execpc.com/~culp/space/flight.html</caption></figure></para></section><para id="eip-29">One common reason for using electronic deployment is for so called "dual-deployment". To allow rockets to fly higher with less drift, rockets using "dual-deployment" deploy a small "drogue" parachute at apogee which only slows the rocket down a little bit. Closer to the ground the main parachute opens and slows the rocket down to a speed which is safe to land at.  </para></content>
+
+</document>

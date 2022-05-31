@@ -1,0 +1,19 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Implementing a Pipelined Sound Engine</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48525</md:content-id>
+  <md:title>Implementing a Pipelined Sound Engine</md:title>
+  <md:abstract/>
+  <md:uuid>da2dc4cd-f98b-4b94-be3e-7bd9949a52c6</md:uuid>
+</metadata>
+
+<content>
+  <para id="eip-135">In order facilitate on the fly sound analysis requiring demanding DSP algorithms, we implemented a parallel three-stage pipelined sound engine that allows sound events to be time correlated to in game events. This pipelined implementation allows the analysis of the song to be performed on chunks of the song simultaneously along with loading new chunks from the input device and playing already analyzed chunks. This method gives the analyzer ample time to perform the analysis, as long as that analysis takes less time to perform than the chunk it is analyzing takes to play. Because each stage of the analysis (the Loader, the Analyzer, and the Player) each run in their own threads, this system can take advantage of multiprocessor systems such as the multi-core processors found in most of today's computers.</para>
+<figure id="cute-dog"><title>The Pipelined Sound Engine</title><media id="sound_pipeline" alt="The full sound engine pipeline system.">
+<image mime-type="image/png" src="../../media/sound_pipeline.png" width="1024" height="284"/>
+</media><caption>The full sound engine pipeline system.</caption></figure><list id="eip-985" list-type="bulleted" bullet-style="none"><item>Stage 1 - Loader: This stage translates the input song file from its source format (e.g. MP3 or WAV) to an internal uncompressed format and buffers the result into buffer chunks that will be set to other to other pipeline stages.</item>
+<item>Stage 2 - Analyzer: This stage takes the uncompressed buffer chunk and performs various bits of time domain and frequency domain analysis, generating a chunk of time-correlated events and the buffer of song that goes with those events.</item>
+<item>Stage 3 – Player: This stage takes the sound and event buffers from the Analyzer and plays them, correlating any events to what is currently being played.</item></list><para id="eip-210">Each stage communicates with the next via an adapter with a loadBuffer method.This method blocks the the current stage of the pipeline until the next stage of the pipeline is ready to receive the buffer. In this way, the pipeline will fill up as much as possible while the player stage is processing the buffer. The player also controls the speed of the pipeline indirectly through this loading method. Great care was taken to minimize the time the transfer of each buffer takes. Rather than copying the buffer from each stage to the next, each stage instead just passes on control of its buffer to the next stage, allocating a new buffer entirely. This allocation process is much faster than copying the data, though if the allocator is bad, it can use more memory than is necessary. Finally, each time a stage of the pipeline blocks to wait until the next stage is done processing or blocks waiting for new data, it relinquishes control of the processor resources, allowing the other stages to run at full speed.</para></content>
+
+</document>

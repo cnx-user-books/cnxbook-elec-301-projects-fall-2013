@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>The Final Game, Conclusions, and Poster</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48539</md:content-id>
+  <md:title>The Final Game, Conclusions, and Poster</md:title>
+  <md:abstract/>
+  <md:uuid>6f8035a0-a8cc-4e17-93c1-d96d229cf545</md:uuid>
+</metadata>
+
+<content>
+    <section id="eip-853"><title>The Game</title><para id="eip-313">The game was successfully built, and a copy of it can be downloaded here:
+<link resource="game.jar">
+<emphasis effect="underline">Sound Tetris (All OS's)</emphasis>
+</link>
+</para><para id="eip-964"><media id="tetrispic" alt="Picture of tetris game">
+	   
+  <image mime-type="image/png" src="../../media/tetrispic.png"/>
+		 
+</media></para><para id="eip-784">In addition, all of the source code is available <link url="https://github.com/chief-tyrol/301game/"/><link url="https://github.com/chief-tyrol/301game/"><emphasis effect="underline">here</emphasis></link>. </para></section><section id="eip-240"><title>Conclusions</title><para id="eip-40">The analyzer works, louder portions of the song do make pieces fall faster, the visualizer does beat with the music, and the next piece will consistently change with differing frequency.</para><para id="import-auto-id11645015033"><title>Bugs</title>There are some bugs with each of the features, notably
+<list id="beatlist">
+<item>The beat detection does not work properly on songs without a clear beat</item>
+<item>The amplitude analysis has trouble finding differences, likely because most modern songs are “mastered” to be at a constant volume</item>
+<item>The frequency analysis does not make it clear which frequencies map to which pieces</item>
+
+</list>
+Despite these issues, the game is playable, and shows that it is possible to use audio to affect gameplay.
+</para><para id="eip-270">Using audio to affect gameplay is a valid, and often entertaining, way of adding randomness to a game. It can increase the diversity of the game, and thereby make it more likely that the user will continue to enjoy the game. In addition, the framework created is generic enough that it could be applied to many games without requiring large code rewrites, meaning that it could potentially be applied to other games.</para></section><section id="eip-19"><title>Poster</title><para id="eip-326"><link resource="301_Final_Poster_Tertis_Sound.pdf">
+<emphasis effect="underline">Final Poster</emphasis>
+</link></para></section></content>
+</document>

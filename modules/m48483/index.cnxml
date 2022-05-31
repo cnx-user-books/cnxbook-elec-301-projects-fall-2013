@@ -1,0 +1,285 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Matlab Code</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48483</md:content-id>
+  <md:title>Matlab Code</md:title>
+  <md:abstract/>
+  <md:uuid>a5f9efd7-b9b8-4193-8e69-2786c8bf4323</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.6991706123" strength="3">Feature Extraction</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.7870186535" strength="3">Database</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.8374275107" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-13.4099072361/module_text" strength="3">Introduction</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-14.5673576316" strength="3">Our Team</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-13.4963514634" strength="3">Results</link>
+      <link url="http://cnx.org/Members/cf8/module.2013-12-15.0916292634" strength="3">Poster</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <code id="eip-89" display="block"><title>Driver.m</title>clear all
+close all
+I1 = getnewvector('metal/metal3.JPG',800, 700, 1400, 800);
+I2 = getnewvector('metal/metal1.JPG',800, 700, 1400, 800);
+I3 = getnewvector('metal/metal2.JPG',800, 700, 1400, 800);
+I4=getnewvector('down1.JPG',800, 700, 1400, 800);
+I5=getnewvector('down2.JPG',800, 700, 1400, 800);
+I6=getnewvector('down3.JPG',800, 700, 1400, 800);
+% need to rescale all images here
+
+[x, y,I1]=getcenter(I1);
+[x1, y1,I2]=getcenter(I2);
+[x2, y2,I3]=getcenter(I3);
+[x3, y3,I4]=getcenter(I4);
+[x4,y4,I5]=getcenter(I5);
+[x5,y5,I6]=getcenter(I6);
+[theta1, r1] = polarize(I1, [x,y]);
+[theta2, r2] = polarize(I2, [x1,y1]);
+[theta3, r3] = polarize(I3, [x2,y2]);
+[theta4, r4] = polarize(I4, [x3,y3]);
+[theta5, r5] = polarize(I5, [x4,y4]);
+[theta6, r6] = polarize(I6, [x5,y5]);
+interval=pi/18;
+[ counter1, dividedData1 ] = divideIntoBins(theta1, r1, interval);
+[ counter2, dividedData2 ] = divideIntoBins(theta2, r2, interval);
+[ counter3, dividedData3 ] = divideIntoBins(theta3, r3, interval);
+[ counter4, dividedData4 ] = divideIntoBins(theta4, r4, interval);
+[ counter5, dividedData5 ] = divideIntoBins(theta5, r5, interval);
+[ counter6, dividedData6 ] = divideIntoBins(theta6, r6, interval);
+counter2 = counter2/(length(theta2));
+counter3 = counter3/(length(theta3));
+counter1 = counter1/(length(theta1));
+counter4 = counter4/(length(theta4));
+counter5 = counter5/(length(theta5));
+% figure;
+% subplot(3,1,1);
+% plot(counter1);
+% subplot(3,1,2);
+% plot(counter2);
+% subplot(3,1,3);
+% plot(counter3);
+disp(norm(counter1-counter2,2));
+disp(norm(counter1-counter3,2));
+disp(norm(counter1-counter4,2));
+disp(norm(counter1-counter5,2));
+
+%n1=(norm(counter2,1)+norm(counter3,1))/2
+%n2=(norm(counter4,1)+norm(counter5,1)+norm(counter6,1))/3
+
+
+
+
+% 
+% % comparing within the same category 
+% v1 = getnewvector('vulcan1.JPG');
+% v2 = getnewvector('vulcan2.JPG');
+% v3 = getnewvector('vulcan3.JPG');
+% d = zeros(3,1);
+% inner = zeros(3,1);
+% [d(1),inner(1)] = getdistance(v1,v2);
+% [d(2),inner(2)] = getdistance(v2,v3);
+% [d(3),inner(3)] = getdistance(v1,v3);
+% % </code><code id="eip-812" display="block"><title>getnewvector.m</title>function I=getnewvector(filename, XMIN, YMIN, WIDTH, HEIGHT)
+I=imread(filename);
+I=imcrop(I,[XMIN, YMIN, WIDTH, HEIGHT]); %crop
+I=rgb2gray(I);
+filter12=fspecial('gaussian',[20,20],20); %lowpass filter
+I=imfilter(I,filter12);
+% figure;
+% imshow(I);
+%I=imcontour(I,1);
+% magical contour algorithm %get rid of unconnected dots and get the largest connect part which is our hand
+I=mean(double(I)/255,3)&gt;0.5;
+[L,N] = bwlabel(I,4);
+s=zeros(1,N); 
+for i=1:N, 
+    s(i)=sum(L(:)==i); 
+end; 
+[t,ind]=max(s);
+I=double(L==ind);
+
+% figure;
+% imshow(I);
+
+% filter12=fspecial('gaussian',[17,17],17);
+% I=imfilter(I,filter12);
+figure;
+imshow(I);
+% I = imresize(I,[1601 1601]);
+% I = im2bw(I,.6);
+
+end</code><code id="eip-575" display="block"><title>getcenter.m</title>% get the center of the contour image
+% output the center coordinate, and the edged image
+function [x,y,Iout]=getcenter(I)
+
+[m, n]=size(I);
+a=sum(sum(I));
+rowindex=zeros(a,1);
+colomnindex=zeros(a,1);
+number1=0;
+for i=1:m,
+  for j=1:n,
+    if I(i,j)==1
+        number1=number1+1;
+        rowindex(number1,1)=i;
+        colomnindex(number1,1)=j;
+    end
+  end
+end
+x=mean(rowindex); 
+size(x);
+x=round(x);
+y=mean(colomnindex);
+y=round(y);
+Iout = edge(I,'canny');
+
+end
+</code><code id="eip-158" display="block"><title>processCropped.m</title>function [ x1,y1 ] = processCropped( category,fileName,saveName)
+% automate the process of feature extraction
+%   Detailed explanation goes here
+  dir = strcat(category,'/',fileName);
+  I = getnewvector(dir,0, 0, 1601, 1601);
+  [x1,y1,I] = getcenter(I);
+  
+  dir2 = strcat(category,'/',saveName); % save directory
+  imwrite(I,dir2,'bmp');
+  
+end</code><code id="eip-957" display="block"><title>processCategory.m</title>function processCategory( category, numOfPics, saveAbrev )
+% process the entire category
+%   Detailed explanation goes here
+  center = zeros(numOfPics,2);
+  for n = 1:numOfPics,
+    fileName = strcat(category,num2str(n),'.jpg');
+    saveName = strcat(saveAbrev,num2str(n),'.bmp');
+    center(n,:) = processCropped( category,fileName,saveName);
+  end
+  csvwrite(strcat(category,'/','centers.dat'),center);
+end
+</code><code id="eip-145" display="block"><title>polarize.m</title>function [theta, r] = polarize(binaryMatrix, center)
+%POLARIZE Summary of this function goes here
+% Center: 1x2
+  [m,n] = size(binaryMatrix);
+  theta = zeros(500,1);
+  r = zeros(500,1);
+  numOfDots = 0;
+  for i = 1:m, % for each row
+    for j = 1:n, % for each column
+      if (binaryMatrix(i,j) == 1),
+        numOfDots = numOfDots + 1;
+        dot = [i,j] - center; % find the relative coordinate with centroid
+        [theta(numOfDots), r(numOfDots)] = cart2pol(dot(1),dot(2)); % convert into polar
+      end
+    end
+  end
+end</code><para id="delete_me"><!-- Insert module text here -->
+ <figure id="cute-dog"><title>divideIntoBins.m</title><media id="dogpic" alt="A dog sitting on a bed">
+    <image mime-type="image/jpeg" src="../../media/1.png"/>
+  </media>
+  
+</figure></para><code id="eip-492" display="block"><title>testDriver.m</title>clear all
+close all
+dir =char('down','up','okay','metal','point','stop','vulcan');
+right=0;
+wrong=0;
+for n=1:7,
+    
+    traning1=csvread(strcat(dir(n,:),'/','features.dat'));
+    
+    [x y]=size(traning1);
+    for k=1:x,
+        training=traning1(k,:);
+        
+        type=classify(training,2,7,8);
+        
+        
+        type1=mode(type);
+        
+        if type1==n
+            
+            right=right+1;
+        else
+            wrong=wrong+1;
+        end
+    end
+    
+end
+size(type)
+
+right
+wrong
+% I1 = getnewvector('metal/metal3.JPG',800, 700, 1400, 800);
+% I2 = getnewvector('metal/metal1.JPG',800, 700, 1400, 800);
+% I3 = getnewvector('metal/metal2.JPG',800, 700, 1400, 800);
+% I4=getnewvector('down1.JPG',800, 700, 1400, 800);
+% I5=getnewvector('down2.JPG',800, 700, 1400, 800);
+% I6=getnewvector('down3.JPG',800, 700, 1400, 800);
+% % need to rescale all images here
+%
+% [x, y,I1]=getcenter(I1);
+% [x1, y1,I2]=getcenter(I2);
+% [x2, y2,I3]=getcenter(I3);
+% [x3, y3,I4]=getcenter(I4);
+% [x4,y4,I5]=getcenter(I5);
+% [x5,y5,I6]=getcenter(I6);
+% [theta1, r1] = polarize(I1, [x,y]);
+% [theta2, r2] = polarize(I2, [x1,y1]);
+% [theta3, r3] = polarize(I3, [x2,y2]);
+% [theta4, r4] = polarize(I4, [x3,y3]);
+% [theta5, r5] = polarize(I5, [x4,y4]);
+% [theta6, r6] = polarize(I6, [x5,y5]);
+% interval=pi/18;
+% [ counter1, dividedData1 ] = divideIntoBins(theta1, r1, interval);
+% [ counter2, dividedData2 ] = divideIntoBins(theta2, r2, interval);
+% [ counter3, dividedData3 ] = divideIntoBins(theta3, r3, interval);
+% [ counter4, dividedData4 ] = divideIntoBins(theta4, r4, interval);
+% [ counter5, dividedData5 ] = divideIntoBins(theta5, r5, interval);
+% [ counter6, dividedData6 ] = divideIntoBins(theta6, r6, interval);
+% counter2 = counter2/(length(theta2));
+% counter3 = counter3/(length(theta3));
+% counter1 = counter1/(length(theta1));
+% counter4 = counter4/(length(theta4));
+% counter5 = counter5/(length(theta5));
+% % figure;
+% % subplot(3,1,1);
+% % plot(counter1);
+% % subplot(3,1,2);
+% % plot(counter2);
+% % subplot(3,1,3);
+% % plot(counter3);
+% disp(norm(counter1-counter2,2));
+% disp(norm(counter1-counter3,2));
+% disp(norm(counter1-counter4,2));
+% disp(norm(counter1-counter5,2));
+%
+% %n1=(norm(counter2,1)+norm(counter3,1))/2
+% %n2=(norm(counter4,1)+norm(counter5,1)+norm(counter6,1))/3
+%
+%
+%
+% %
+% % % comparing within the same category
+% % v1 = getnewvector('vulcan1.JPG');
+% % v2 = getnewvector('vulcan2.JPG');
+% % v3 = getnewvector('vulcan3.JPG');
+% % d = zeros(3,1);
+% % inner = zeros(3,1);
+% % [d(1),inner(1)] = getdistance(v1,v2);
+% % [d(2),inner(2)] = getdistance(v2,v3);
+% % [d(3),inner(3)] = getdistance(v1,v3);
+% % %</code><para id="eip-171"><figure id="cute-dog111"><title>classify.m(part1)</title><media id="dogpic44" alt="A dog sitting on a bed">
+    <image mime-type="image/png" src="../../media/21.png"/>
+  </media>
+</figure></para><para id="eip-866"><figure id="cute-dog11">
+  <title>classify.m(part2)</title>
+  <media id="dogpic4" alt="A dog sitting on a bed">
+    <image mime-type="image/png" src="../../media/22.png"/>
+  </media>
+</figure></para></content>
+
+</document>

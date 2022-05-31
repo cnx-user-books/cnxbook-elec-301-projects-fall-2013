@@ -1,0 +1,23 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+
+<title>Experiment results</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48458</md:content-id>
+  <md:title>Experiment results</md:title>
+  <md:abstract/>
+  <md:uuid>237f69e8-1f1b-482b-9f74-f817a9eaeaf6</md:uuid>
+</metadata>
+
+<content>
+  <para id="eip-846"><title>Results</title>When we need to do recognizing. First, we standarize pictures in database and get the mean image. Then we calculate the difference between each image and the mean image. After this, we build covariance matrix from that and get eigen value and vector from the covariance matrix and build an eigen ear space. Then we project every difference vector between training ear and mean ear on to eigen ear space to get the eigen ear. </para><para id="delete_me"><!-- Insert module text here -->
+  <media id="dog_on_couch" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/3-e371.jpg"/>
+		 
+</media></para><para id="eip-194"><media id="dog_on_couchq" alt="A dog sitting on a couch.">
+	   
+  <image mime-type="image/jpeg" src="../../media/sb.jpg"/>
+		 
+</media></para></content>
+
+</document>

@@ -1,0 +1,36 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Method for Correcting Baseline Wander in Raw ECG Signals</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48338</md:content-id>
+  <md:title>Method for Correcting Baseline Wander in Raw ECG Signals</md:title>
+  <md:abstract>Raw ECG signals are inherently noise. This causes a drift in the ECG signal. In order to perform any sort of analysis on ECG signals, it is necessary to filter out noise and correct the baseline wander. This module illustrates one such method to perform baseline wander correction.</md:abstract>
+  <md:uuid>ba62727f-9e38-4431-8bac-d00248eeebf9</md:uuid>
+</metadata>
+
+<content>
+    <para id="import-auto-id1167547731772">Myocardial Infarction (MI) can be diagnosed from a patient’s ECG signal by determining if certain features indicative of the condition are present in the signal trace. The infarction can occur in different areas of the heart, giving rise to MI families specified by the location of the infarction. </para>
+    <para id="import-auto-id1167537377991">A patient's raw ECG is inherently noisy due to electric and power line interference, electromagnetic interference, muscle activity, lead placement on the body, and bowel movements. This noise produces a baseline wander in the signal that must be corrected in order to extract features. </para>
+    <figure id="import-auto-id1167541793942">
+      <media id="import-auto-id1167548192309" alt="">
+        <image mime-type="image/png" src="../../media/Picture 3.png" height="334" width="625"/>
+      </media>
+    </figure>
+    <para id="import-auto-id1167537377888">ECG signal analysis relies heavily on identifying a feature and extracting subsequent features from it. Segments in the signal can also be computed from these points of interest and related to one another. Signal drift can introduce error in the extraction of features and comparison between them. Hence, it is necessary to obtain a normalized signal for an accurate analysis. </para>
+    <para id="import-auto-id1167541685921">The process for baseline wander correction is as follows. The raw ECG signal is first filtered with an FIR low pass filter. Second, the filtered signal is passed through a 200 ms median filter to eliminate the QRS complex  and then again through a 600 ms median filter to remove the T wave. Then, this signal is subtracted from the low passed filtered signal. The difference between the two signals will constitute the ECG signal corrected of baseline wander.</para>
+    <figure id="import-auto-id1167541609327">
+      <media id="import-auto-id1167548175586" alt="">
+        <image mime-type="image/png" src="../../media/Picture 2.png" height="82" width="624"/>
+      </media>
+    </figure>
+    <figure id="import-auto-id1167541916071">
+      <media id="import-auto-id1167548228990" alt="">
+        <image mime-type="image/png" src="../../media/Picture 4.png" height="334" width="625"/>
+      </media>
+    </figure>
+    <figure id="import-auto-id1167547733434">
+      <media id="import-auto-id1167547920319" alt="">
+        <image mime-type="image/png" src="../../media/Picture 7.png" height="334" width="625"/>
+      </media>
+    </figure>
+  </content>
+</document>

@@ -1,0 +1,163 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<title>Non-negative Matrix Factorization (NMF)</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m48403</md:content-id>
+  <md:title>Non-negative Matrix Factorization (NMF)</md:title>
+  <md:abstract>A brief discussion of NMF (Non-negative Matrix Factorization).</md:abstract>
+  <md:uuid>e7ae2f9b-2809-47da-b7e5-6a5106d0386f</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="example">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.2513585261" strength="3">Application and Result</link>
+    </link-group>
+    <link-group type="supplemental">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.8927629197" strength="3">Conclusion</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.1122426761" strength="3">Future Work</link>
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-18.3202604072" strength="3">Poster</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/Members/jiangjiangchishi/module.2013-12-17.2361220476" strength="3">Introduction</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+  <section id="eip-23"><title>Non-negative Matrix Factorization</title><para id="eip-215">NMF provides an alternative approach to decomposition that assumes that the data and the components are non-negative. 
+The model for continuous data looks like this:<m:math display="block">
+ <m:mtable columnalign="left">
+  <m:mtr>
+   <m:mtd>
+    <m:munder>
+     <m:mrow>
+      <m:mi>min</m:mi></m:mrow>
+     <m:mrow>
+      <m:mi>W</m:mi><m:mo>,</m:mo><m:mi>H</m:mi></m:mrow>
+    </m:munder>
+    <m:mfrac>
+     <m:mn>1</m:mn>
+     <m:mn>2</m:mn>
+    </m:mfrac>
+    <m:msubsup>
+     <m:mrow><m:mo>‖</m:mo> <m:mrow>
+      <m:mi>X</m:mi><m:mo>−</m:mo><m:mi>W</m:mi><m:mi>H</m:mi></m:mrow> <m:mo>‖</m:mo></m:mrow>
+     <m:mn>2</m:mn>
+     <m:mn>2</m:mn>
+    </m:msubsup>
+    
+   </m:mtd>
+  </m:mtr>
+  <m:mtr>
+   <m:mtd>
+    <m:mi>s</m:mi><m:mi>u</m:mi><m:mi>b</m:mi><m:mi>j</m:mi><m:mi>e</m:mi><m:mi>c</m:mi><m:mi>t</m:mi><m:mtext> </m:mtext><m:mtext> </m:mtext><m:mi>t</m:mi><m:mi>o</m:mi><m:mtext> </m:mtext><m:mtext> </m:mtext><m:msub>
+     <m:mi>W</m:mi>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mi>j</m:mi></m:mrow>
+    </m:msub>
+    <m:mo>≥</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mtext> </m:mtext><m:msub>
+     <m:mi>H</m:mi>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mi>j</m:mi></m:mrow>
+    </m:msub>
+    <m:mo>≥</m:mo><m:mn>0</m:mn>
+   </m:mtd>
+  </m:mtr>
+ </m:mtable>
+ 
+</m:math>
+There are two views for NMF, and they provide different insights.
+</para><section id="eip-665"><title>Archetypal Analysis</title><para id="eip-476">PCA tends to group both positively correlated and negatively correlated components together (it’s only looking for variables with strong correlation). On the other hand, NMF, by forcing W and H to be positive, finds patterns with the same direction of correlation.
+</para></section><section id="eip-284"><title>Fuzzy Clustering</title><para id="eip-213">
+W is sparse and it gives probabilistic cluster memberships (columns of W corresponds to kth cluster) and columns of H gives variables that define the kth cluster. 
+
+
+</para><para id="eip-111">For count data, the model looks slightly different (related to Poisson):
+</para><equation id="eip-794"><m:math display="block">
+ <m:mtable columnalign="left">
+  <m:mtr>
+   <m:mtd>
+    <m:munder>
+     <m:mrow>
+      <m:mtext>maximize</m:mtext></m:mrow>
+     <m:mrow>
+      <m:mi>W</m:mi><m:mo>,</m:mo><m:mi>H</m:mi></m:mrow>
+    </m:munder>
+    <m:mstyle displaystyle="true">
+     <m:munderover>
+      <m:mo>∑</m:mo>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow>
+      <m:mi>n</m:mi>
+     </m:munderover>
+     <m:mrow>
+      <m:mstyle displaystyle="true">
+       <m:munderover>
+        <m:mo>∑</m:mo>
+        <m:mrow>
+         <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow>
+        <m:mi>p</m:mi>
+       </m:munderover>
+       <m:mrow>
+        <m:mrow><m:mo>[</m:mo> <m:mrow>
+         <m:msub>
+          <m:mi>X</m:mi>
+          <m:mrow>
+           <m:mi>i</m:mi><m:mi>j</m:mi></m:mrow>
+         </m:msub>
+         <m:mi>log</m:mi><m:mo stretchy="false">(</m:mo><m:msub>
+          <m:mi>W</m:mi>
+          <m:mi>i</m:mi>
+         </m:msub>
+         <m:msub>
+          <m:mi>H</m:mi>
+          <m:mi>j</m:mi>
+         </m:msub>
+         <m:mo stretchy="false">)</m:mo><m:mo>−</m:mo><m:msub>
+          <m:mi>W</m:mi>
+          <m:mi>i</m:mi>
+         </m:msub>
+         <m:msub>
+          <m:mi>H</m:mi>
+          <m:mi>j</m:mi>
+         </m:msub>
+         </m:mrow> <m:mo>]</m:mo></m:mrow></m:mrow>
+      </m:mstyle></m:mrow>
+    </m:mstyle>
+   </m:mtd>
+  </m:mtr>
+  <m:mtr>
+   <m:mtd>
+    <m:mi>s</m:mi><m:mi>u</m:mi><m:mi>b</m:mi><m:mi>j</m:mi><m:mi>e</m:mi><m:mi>c</m:mi><m:mi>t</m:mi><m:mtext> </m:mtext><m:mtext> </m:mtext><m:mi>t</m:mi><m:mi>o</m:mi><m:mtext> </m:mtext><m:mtext> </m:mtext><m:msub>
+     <m:mi>W</m:mi>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mi>j</m:mi></m:mrow>
+    </m:msub>
+    <m:mo>≥</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mtext> </m:mtext><m:msub>
+     <m:mi>H</m:mi>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mi>j</m:mi></m:mrow>
+    </m:msub>
+    <m:mo>≥</m:mo><m:mn>0</m:mn>
+   </m:mtd>
+  </m:mtr>
+ </m:mtable>
+ 
+</m:math>
+</equation></section><section id="eip-143"><title>NMF: Discussion on Image Dataset</title><para id="eip-627">When used on non-negative data such as images, NMF learns a parts-based representation of the dataset, resulting in interpretable models; while PCA learns the holistic representation. 
+Example of facial recognition:
+<figure id="NMF_Face"><title>Basis Image given by NMF</title><media id="dogpic" alt="A dog sitting on a bed">
+    <image mime-type="image/png" src="../../media/NMF_Face.png"/>
+  </media>
+</figure><figure id="PCA_Face"><title>Basis Image given by PCA</title><media id="dogpic1" alt="A dog sitting on a bed">
+    <image mime-type="image/png" src="../../media/PCA_Face.png"/>
+  </media>
+<caption>Here positive values are denoted with black pixels and negative values with red pixels. </caption></figure></para><para id="eip-603">All three algorithms (PCA, ICA and NMF) learn to represent a face using linear combination of basis images. We see that NMF picks out individual components like nose, eyes and mouth, which corresponds well with our intuitive notion of faces. The reason for this is that first, only additive combinations are allowed in NMF and so this is compatible with the intuitive notion of combining parts to form a whole. Second, the basis images are sparse (It is an advantage because they are non-global and should contain several versions of mouths, noses etc. The variability of the face is generated by combining these different parts). PCA, on the other hand, gives out noisy components that doesn’t offer much interpretability. The reason for this is because first, PCA lets each face to be approximated by a linear combination of all the basis images (the vectors aren't sparse) and secondly, it allows the entries of the factorized vectors to be of arbitrary sign. And since these generally involve complex cancellations between positive and negative numbers, many basis images will lack intuitive meaning. ICA basis images (which isn's shown here), are independent holistic representations. The independence assumption made by ICA is ill-suited for learning parts-based representation because various parts are likely to occur together. 
+
+ 
+</para><para id="eip-740">This is a biconvex optimization problem (convex in H when W fixed, convex in W when H fixed). For implementation, we used the nnmf command in Matlab (this algorithm uses Alternating Least Squares for solving).</para><section id="eip-569"><title>NMF: Other Application</title><para id="eip-810">
+More generally, NMF models the directly observable variables from the hidden variables, where each hidden variable activates a subset of visible variables ("part"). Activation of a collection of hidden variables combine these parts additively to generate a whole. Seen from this perspective, another often used application of NMF is semantic analysis of text document (think text mining).
+</para></section></section><note id="eip-792">Reference: "Learning the Parts of Objects by Nonnegative Matrix Factorization", D.D.Lee, H.S.Seung.</note></section></content>
+
+</document>

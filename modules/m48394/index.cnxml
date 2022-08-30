@@ -264,7 +264,7 @@
      <m:mrow>
       <m:mi>d</m:mi><m:mmultiscripts>
        <m:mrow/>
-       <m:mprescripts/>
+       <m:none/><m:none/><m:mprescripts/>
        <m:mi>j</m:mi>
        <m:mn>2</m:mn>
       </m:mmultiscripts>
@@ -292,7 +292,7 @@
   <m:mrow>
    <m:mi>d</m:mi><m:mmultiscripts>
     <m:mrow/>
-    <m:mprescripts/>
+    <m:none/><m:none/><m:mprescripts/>
     <m:mi>j</m:mi>
     <m:mn>2</m:mn>
    </m:mmultiscripts>
